@@ -5,9 +5,24 @@
 package DTOS;
 
 /**
+ * Elementos que el usuario guardara en los parametros de las pruebas.
  *
- * @author gaspa
+ * @author Ángel Ruíz García - 00000248171
  */
 public class ParametroDTO {
-    
+
+    private String nombreParametro;
+
+    public ParametroDTO(String nombreParametro) {
+        this.nombreParametro = nombreParametro;
+    }
+
+    public String getNombreParametro() {
+        return nombreParametro;
+    }
+
+    public void setNombreParametro(String nombreParametro) {
+        this.nombreParametro = nombreParametro;
+    }
+
 }

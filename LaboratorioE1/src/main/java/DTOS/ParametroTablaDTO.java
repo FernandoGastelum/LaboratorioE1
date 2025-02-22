@@ -5,9 +5,29 @@
 package DTOS;
 
 /**
+ * Elementos de la tabla de los parametros de las pruebas.
  *
- * @author gaspa
+ * @author Ángel Ruíz García - 00000248171
  */
 public class ParametroTablaDTO {
+
+    private String nombreParametro;
+
+    public ParametroTablaDTO(String nombreParametro) {
+        this.nombreParametro = nombreParametro;
+    }
+
+    public String getNombreParametro() {
+        return nombreParametro;
+    }
+
+    public void setNombreParametro(String nombreParametro) {
+        this.nombreParametro = nombreParametro;
+    }
+
+    @Override
+    public String toString() {
+        return "ParametroTablaDTO{" + "Parametro: " + nombreParametro + '}';
+    }
     
 }

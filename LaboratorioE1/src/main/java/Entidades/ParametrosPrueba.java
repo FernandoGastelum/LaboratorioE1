@@ -47,7 +47,7 @@ public class ParametrosPrueba {
 
     @Override
     public String toString() {
-        return "--- Parametro de Prueba ---\nID: " + id + "\nID de Prueba" + idPrueba + "\nParametro: " + nombreParametro;
+        return "--- Parametro de Prueba ---\nID: " + id + "\nID de Prueba: " + idPrueba + "\nParametro: " + nombreParametro;
     }
 
 }

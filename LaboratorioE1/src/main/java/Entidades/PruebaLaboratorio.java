@@ -4,6 +4,8 @@
  */
 package Entidades;
 
+import java.util.List;
+
 /**
  * Todos los elementos de las pruebas de laboratorio.
  *
@@ -14,11 +16,11 @@ public class PruebaLaboratorio {
     private int id;
     private String nombrePrueba;
     private String categoria;
+    private List<ParametrosPrueba> parametros;
 
-    public PruebaLaboratorio(int id, String nombrePrueba, String categoria) {
+    public PruebaLaboratorio(int id, String nombrePrueba) {
         this.id = id;
         this.nombrePrueba = nombrePrueba;
-        this.categoria = categoria;
     }
 
     public int getId() {
@@ -42,6 +44,13 @@ public class PruebaLaboratorio {
         this.categoria = categoria;
     }
 
+    public List<ParametrosPrueba> getParametros() {
+        return parametros;
+    }
+    public void setParametros(List<ParametrosPrueba> parametros) {
+        this.parametros = parametros;
+    }
+    
     @Override
     public String toString() {
         return "--- Prueba de Laboratorio ---\nID: " + id + "\nPrueba: " + nombrePrueba + "\nCategoria: " + categoria;

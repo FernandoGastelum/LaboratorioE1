@@ -21,7 +21,9 @@ public interface IResultadoDAO {
 
     Resultado actualizar(EditarResultadoDTO resultado) throws PersistenciaException;
 
-    void eliminar(int id) throws PersistenciaException;
+    Resultado eliminar(int id) throws PersistenciaException;
 
     Resultado obtenerPorID(int id) throws PersistenciaException;
+    
+    List<Resultado> listarResultado() throws PersistenciaException;
 }

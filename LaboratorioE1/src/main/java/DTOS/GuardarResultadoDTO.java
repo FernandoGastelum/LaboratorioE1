@@ -4,6 +4,7 @@
  */
 package DTOS;
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -13,11 +14,11 @@ public class GuardarResultadoDTO {
     private int idAnalisisDetalle;
     private int idParametro;
     private String valor;
-    private LocalDate fechaRegistro;
+    private Date fechaRegistro;
 
     public GuardarResultadoDTO() {}
 
-    public GuardarResultadoDTO(int idAnalisisDetalle, int idParametro, String valor, LocalDate fechaRegistro) {
+    public GuardarResultadoDTO(int idAnalisisDetalle, int idParametro, String valor, Date fechaRegistro) {
         this.idAnalisisDetalle = idAnalisisDetalle;
         this.idParametro = idParametro;
         this.valor = valor;
@@ -48,11 +49,17 @@ public class GuardarResultadoDTO {
         this.valor = valor;
     }
 
-    public LocalDate getFechaRegistro() {
+    public Date getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDate fechaRegistro) {
+    public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+
+    @Override
+    public String toString() {
+        return "GuardarResultadoDTO{" + "idAnalisisDetalle=" + idAnalisisDetalle + ", idParametro=" + idParametro + ", valor=" + valor + ", fechaRegistro=" + fechaRegistro + '}';
+    }
+    
 }

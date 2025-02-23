@@ -4,10 +4,21 @@
  */
 package Negocio;
 
+import DTOS.EditarResultadoDTO;
+import DTOS.GuardarResultadoDTO;
+import DTOS.ResultadoDTO;
+import DTOS.ResultadoTablaDTO;
+import Persistencia.PersistenciaException;
+import java.util.List;
+
 /**
  *
  * @author Ilian Fernando Gastelum Romo 228761
  */
 public interface IResultadoNegocio {
-    
+    List<ResultadoTablaDTO> obtenerResultadosPorAnalisis(int idAnalisis) throws NegocioException;
+    ResultadoDTO guardar(GuardarResultadoDTO resultado) throws NegocioException;
+    ResultadoDTO actualizar(EditarResultadoDTO resultado) throws NegocioException;
+    ResultadoDTO eliminar(int id) throws NegocioException;
+    List<ResultadoTablaDTO> listarResultado() throws NegocioException;
 }

@@ -14,16 +14,14 @@ public class EditarResultadoDTO {
     private int idAnalisisDetalle;
     private int idParametro;
     private String valor;
-    private Date fechaRegistro;
 
     public EditarResultadoDTO() {}
 
-    public EditarResultadoDTO(int id, int idAnalisisDetalle, int idParametro, String valor, Date fechaRegistro) {
+    public EditarResultadoDTO(int id, int idAnalisisDetalle, int idParametro, String valor) {
         this.id = id;
         this.idAnalisisDetalle = idAnalisisDetalle;
         this.idParametro = idParametro;
         this.valor = valor;
-        this.fechaRegistro = fechaRegistro;
     }
 
     public int getId() {
@@ -58,11 +56,9 @@ public class EditarResultadoDTO {
         this.valor = valor;
     }
 
-    public Date getFechaRegistro() {
-        return fechaRegistro;
+    @Override
+    public String toString() {
+        return "EditarResultadoDTO{" + "id=" + id + ", idAnalisisDetalle=" + idAnalisisDetalle + ", idParametro=" + idParametro + ", valor=" + valor + '}';
     }
-
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
+    
 }

@@ -66,4 +66,10 @@ public class Resultado {
     public void setValor(String valor) {
         this.valor = valor;
     }
+
+    @Override
+    public String toString() {
+        return "Resultado{" + "id=" + id + ", idAnalisisDetalle=" + idAnalisisDetalle + ", idParametro=" + idParametro + ", valor=" + valor + ", fechaRegistro=" + fechaRegistro + '}';
+    }
+    
 }

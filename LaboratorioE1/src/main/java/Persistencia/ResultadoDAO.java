@@ -22,9 +22,9 @@ import java.util.List;
  * @author Ilian Fernando Gastelum Romo 228761
  */
 public class ResultadoDAO implements IResultadoDAO{
-    private final Connection conexion;
-    public ResultadoDAO(Connection conexion){
-        this.conexion = conexion;
+    private IConexionBD conexionBD;
+    public ResultadoDAO(IConexionBD conexion){
+        this.conexionBD = conexion;
     }
 
     @Override
@@ -34,7 +34,8 @@ public class ResultadoDAO implements IResultadoDAO{
                      + "JOIN AnalisisDetalle ad ON r.idAnalisisDetalle = ad.id "
                      + "WHERE ad.idAnalisis = ?";
 
-        try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+        try (Connection conexion = conexionBD.crearConexion();
+            PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setInt(1, idAnalisis);
             ResultSet rs = stmt.executeQuery();
 
@@ -56,9 +57,10 @@ public class ResultadoDAO implements IResultadoDAO{
     @Override
     public Resultado guardar(GuardarResultadoDTO resultado) throws PersistenciaException {
         String query = "INSERT INTO Resultados (idAnalisisDetalle, idParametro, valor) "
-                     + "VALUES (?, ?, ?, ?)";
+                     + "VALUES (?, ?, ?)";
 
-        try (PreparedStatement stmt = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conexion = conexionBD.crearConexion();
+                PreparedStatement stmt = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, resultado.getIdAnalisisDetalle());
             stmt.setInt(2, resultado.getIdParametro());
             stmt.setString(3, resultado.getValor());
@@ -80,11 +82,12 @@ public class ResultadoDAO implements IResultadoDAO{
     public Resultado actualizar(EditarResultadoDTO resultado) throws PersistenciaException {
         String query = "UPDATE Resultados SET idAnalisisDetalle = ?, idParametro = ?, valor = ? WHERE id = ?";
 
-        try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+        try (Connection conexion = conexionBD.crearConexion();
+                PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setInt(1, resultado.getIdAnalisisDetalle());
             stmt.setInt(2, resultado.getIdParametro());
             stmt.setString(3, resultado.getValor());
-            stmt.setInt(5, resultado.getId());
+            stmt.setInt(4, resultado.getId());
 
             int rows = stmt.executeUpdate();
             if (rows == 0) {
@@ -98,15 +101,21 @@ public class ResultadoDAO implements IResultadoDAO{
     }
 
     @Override
-    public void eliminar(int id) throws PersistenciaException {
+    public Resultado eliminar(int id) throws PersistenciaException {
         String query = "DELETE FROM Resultados WHERE id = ?";
 
-        try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+        try (Connection conexion = conexionBD.crearConexion();
+                PreparedStatement stmt = conexion.prepareStatement(query)) {
+            Resultado resultadoEliminado = this.obtenerPorID(id);
             stmt.setInt(1, id);
-            int rows = stmt.executeUpdate();
-            if (rows == 0) {
-                throw new PersistenciaException("No se encontró el resultado a eliminar");
+            int filasAfectadas = stmt.executeUpdate();
+            if (filasAfectadas == 0) {
+                throw new PersistenciaException("No se encontro un resultado con el Id proporcionado.");
             }
+            
+            stmt.close();
+            conexion.close();
+            return resultadoEliminado;
         } catch (SQLException e) {
             throw new PersistenciaException(e.getMessage());
         }
@@ -114,9 +123,10 @@ public class ResultadoDAO implements IResultadoDAO{
 
     @Override
     public Resultado obtenerPorID(int id) throws PersistenciaException {
-        String query = "SELECT * FROM Resultados WHERE id = ?";
+        String query = "SELECT id,idAnalisisDetalle,idParametro,valor,fechaRegistro FROM Resultados WHERE id = ?";
 
-        try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+        try (Connection conexion = conexionBD.crearConexion();
+                PreparedStatement stmt = conexion.prepareStatement(query)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
 
@@ -134,5 +144,33 @@ public class ResultadoDAO implements IResultadoDAO{
         } catch (SQLException e) {
             throw new PersistenciaException(e.getMessage());
         }
+    }
+    @Override
+    public List<Resultado> listarResultado() throws PersistenciaException{
+        String query = "SELECT id,idAnalisisDetalle,idParametro,valor,fechaRegistro FROM Resultados";
+
+        try (Connection conexion = conexionBD.crearConexion();
+            PreparedStatement stmt = conexion.prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+
+            List<Resultado> resultadoLista = new ArrayList<>();
+            while (rs.next()) {
+                resultadoLista.add(this.convertirResultadoEntidad(rs));
+            }
+            rs.close();
+            stmt.close();
+            conexion.close();
+            return resultadoLista;
+        } catch (SQLException e) {
+            throw new PersistenciaException(e.getMessage());
+        }
+    }
+    private Resultado convertirResultadoEntidad(ResultSet resultado) throws SQLException {
+        int id = resultado.getInt("id");
+        int idAnalisisDetalle = resultado.getInt("idAnalisisDetalle");
+        int idParametro = resultado.getInt("idParametro");
+        String valor = resultado.getString("valor");
+        Date fechaRegistro = resultado.getDate("fechaRegistro");
+        return new Resultado(id, idAnalisisDetalle, idParametro, valor, fechaRegistro);
     }
 }

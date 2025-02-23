@@ -9,9 +9,13 @@ import DTOS.AnalisisDetalleDTO;
 import DTOS.AnalisisDetalleTablaDTO;
 import DTOS.EditarAnalisisDTO;
 import DTOS.EditarAnalisisDetalleDTO;
+import DTOS.EditarResultadoDTO;
 import DTOS.GuardarAnalisisDTO;
 import DTOS.GuardarAnalisisDetalleDTO;
+import DTOS.GuardarResultadoDTO;
+import DTOS.ResultadoDTO;
 import Entidades.AnalisisLaboratorio;
+import Entidades.Resultado;
 import Negocio.AnalisisDetalleNegocio;
 import Negocio.AnalisisNegocio;
 import Negocio.IAnalisisDetalleNegocio;
@@ -25,7 +29,9 @@ import Persistencia.IAnalisisDAO;
 import Persistencia.IAnalisisDetalleDAO;
 import Persistencia.IClienteDAO;
 import Persistencia.IConexionBD;
+import Persistencia.IResultadoDAO;
 import Persistencia.PersistenciaException;
+import Persistencia.ResultadoDAO;
 import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
@@ -146,8 +152,52 @@ public class Temporal {
             System.out.println(e.getMessage());
         }
     }
+    public void guardarResultado() {
+        try {
+            IConexionBD conexion = new ConexionBD();
+            IResultadoDAO resultadoDAO = new ResultadoDAO(conexion);
+            GuardarResultadoDTO guardar = new GuardarResultadoDTO(3, 9, "NewGuard", new Date());
+            Resultado resultadoBD = resultadoDAO.guardar(guardar);
+            System.out.println(resultadoBD);
+        } catch (PersistenciaException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void actualizarResultado() {
+        try {
+            IConexionBD conexion = new ConexionBD();
+            IResultadoDAO resultadoDAO = new ResultadoDAO(conexion);
+            EditarResultadoDTO editar = new EditarResultadoDTO(9, 3, 5, "editado");
+            Resultado resultadoBD = resultadoDAO.actualizar(editar);
+            System.out.println(resultadoBD);
+        } catch (PersistenciaException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void eliminarResultado() {
+        try {
+            IConexionBD conexion = new ConexionBD();
+            IResultadoDAO resultadoDAO = new ResultadoDAO(conexion);
+            Resultado resultadoBD = resultadoDAO.eliminar(17);
+            System.out.println(resultadoBD);
+        } catch (PersistenciaException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void consultarResultados() {
+        try {
+            IConexionBD conexion = new ConexionBD();
+            IResultadoDAO resultadoDAO = new ResultadoDAO(conexion);
+            List<Resultado> resultadosBD = resultadoDAO.obtenerResultadosPorAnalisis(0);
+            System.out.println(resultadosBD);
+        } catch (PersistenciaException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public static void main(String[] args) {
         Temporal temp = new Temporal();
-        temp.eliminarAnalisisDetalles();
+        temp.eliminarResultado();
     }
 }

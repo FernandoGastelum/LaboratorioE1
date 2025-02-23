@@ -4,10 +4,22 @@
  */
 package Persistencia;
 
+import DTOS.ParametroDTO;
+import Entidades.ParametrosPrueba;
+import java.util.List;
+
 /**
+ * Metodos de la clase ParametroDAO.
  *
- * @author gaspa
+ * @author Ángel Ruíz García - 00000248171
  */
 public interface IParametroDAO {
-    
+
+    List<ParametrosPrueba> tablaParametros() throws PersistenciaException;
+
+    ParametrosPrueba guardarParametro(int idPrueba, ParametroDTO parametro) throws PersistenciaException;
+
+    ParametrosPrueba editarParametro(int id, ParametroDTO parametro) throws PersistenciaException;
+
+    ParametrosPrueba eliminarParametro(int id) throws PersistenciaException;
 }

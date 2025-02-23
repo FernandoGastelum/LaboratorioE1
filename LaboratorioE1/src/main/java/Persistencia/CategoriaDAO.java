@@ -4,8 +4,9 @@
  */
 package Persistencia;
 
-import DTOS.ParametroDTO;
-import Entidades.ParametrosPrueba;
+import DTOS.CategoriaDTO;
+import DTOS.CategoriaTablaDTO;
+import Entidades.CategoriaPrueba;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,54 +16,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Todos los metodos para realizar las operaciones referentes a los parámetros
+ * Todos los metodos para realizar las operaciones referentes a las categorías
  * de las pruebas
  *
  * @author Ángel Ruíz García - 00000248171
  */
-public class ParametroDAO implements IParametroDAO {
+public class CategoriaDAO implements ICategoriaDAO {
 
     private IConexionBD conexionBD;
 
-    public ParametroDAO(IConexionBD conexionBD) {
+    public CategoriaDAO(IConexionBD conexionBD) {
         this.conexionBD = conexionBD;
     }
 
-    private ParametrosPrueba convertirParametro(ResultSet resultado) throws SQLException {
+    private CategoriaPrueba convertirCategoria(ResultSet resultado) throws SQLException {
         int id = resultado.getInt("id");
-        int idPrueba = resultado.getInt("idPrueba");
-        String nombreParametro = resultado.getString("nombreParametro");
+        int idPruebaLab = resultado.getInt("idPruebaLab");
+        String nombreParametro = resultado.getString("nombreCategoria");
 
-        ParametrosPrueba parametroConvertida = new ParametrosPrueba(id, idPrueba, nombreParametro);
-        return parametroConvertida;
+        CategoriaPrueba categoriaConvertida = new CategoriaPrueba(id, idPruebaLab, nombreParametro);
+        return categoriaConvertida;
     }
     
-    // (Sin usar)
-    private int obtenerIDParametro(ParametroDTO parametro, Connection conexion) throws SQLException {
-        String buscarSQL = """
-                       SELECT id FROM ParametrosPrueba
-                       WHERE nombreParametro = ?;
-                       """;
-        try (PreparedStatement buscarStatement = conexion.prepareStatement(buscarSQL)) {
-            buscarStatement.setString(1, parametro.getNombreParametro());
-            try (ResultSet resultado = buscarStatement.executeQuery()) {
-                if (resultado.next()) {
-                    return resultado.getInt("id");
-                }
-            }
-        }
-        return -1; // Indica que no se encontró la prueba
-    }
-    
-    private ParametrosPrueba obtenerParametro(int id) throws PersistenciaException {
+    private CategoriaPrueba obtenerCategoria(int id) throws PersistenciaException {
         try {
 
             String consultaSQL = """
                                  SELECT 
                                     id,
-                                    idPrueba,
-                                    nombreParametro
-                                 FROM ParametrosPrueba WHERE id = ?;
+                                    idPruebaLab,
+                                    nombreCategoria
+                                 FROM CategoriaPrueba WHERE id = ?;
                                  """;
 
             //
@@ -73,71 +57,72 @@ public class ParametroDAO implements IParametroDAO {
 
             //
             if (resultado.next()) {
-                return this.convertirParametro(resultado);
+                return this.convertirCategoria(resultado);
             }
             return null;
         } catch (SQLException ex) {
             throw new PersistenciaException(ex.getMessage());
         }
     }
-
+    
     // Buscar (PENDIENTE)
     @Override
-    public List<ParametrosPrueba> tablaParametros() throws PersistenciaException {
+    public List<CategoriaPrueba> tablaCategorias() throws PersistenciaException {
         try {
             Connection conexion = this.conexionBD.crearConexion(); // Crea conexion
             String consultaSQL = """
                                  SELECT 
                                     id,
-                                    idPrueba,
-                                    nombreParametro
-                                 FROM ParametrosPrueba
+                                    idPruebaLab,
+                                    nombreCategoria
+                                 FROM CategoriaPrueba
                                  """;
             PreparedStatement preparedStatement = conexion.prepareStatement(consultaSQL); // Prepara la consulta para la conexion
             ResultSet resultado = preparedStatement.executeQuery(); // Guarda la conexion ya preparada
 
-            List<ParametrosPrueba> parametrosPruebaLista = null;
+            List<CategoriaPrueba> categoriaPruebaLista = null;
             while (resultado.next()) {
-                if (parametrosPruebaLista == null) { // Si la lista no existe crea una
-                    parametrosPruebaLista = new ArrayList<>();
+                if (categoriaPruebaLista == null) { // Si la lista no existe crea una
+                    categoriaPruebaLista = new ArrayList<>();
                 }
 
-                parametrosPruebaLista.add(this.convertirParametro(resultado));
+                categoriaPruebaLista.add(this.convertirCategoria(resultado));
             }
             resultado.close();
             preparedStatement.close();
             conexion.close();
 
-            return parametrosPruebaLista;
+            return categoriaPruebaLista;
         } catch (SQLException ex) {
             throw new PersistenciaException(ex.getMessage());
         }
     }
 
+    
     // Guardar
     @Override
-    public ParametrosPrueba guardarParametro(int idPrueba, ParametroDTO parametro) throws PersistenciaException {
+    public CategoriaPrueba guardarCategoria(int idPruebaLab, CategoriaDTO categoria) throws PersistenciaException {
         try {
             Connection conexion = this.conexionBD.crearConexion();
             String insertParametro = """
-                                    INSERT INTO ParametrosPrueba 
-                                    (idPrueba, nombreParametro)
+                                    INSERT INTO CategoriaPrueba 
+                                    (idPruebaLab, nombreCategoria)
                                     VALUES (?, ?);
                                     """;
             PreparedStatement preparedStatement = conexion.prepareStatement(insertParametro, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setInt(1, idPrueba);
-            preparedStatement.setString(2, parametro.getNombreParametro());
+            preparedStatement.setInt(1, idPruebaLab);
+            preparedStatement.setString(2, categoria.getNombreCategoria());
 
             int filasAfectadas = preparedStatement.executeUpdate();
             if (filasAfectadas == 0) {
-                throw new PersistenciaException("La inserción del usuario falló, no se pudo insertar el parámetro.");
+                throw new PersistenciaException("La inserción del usuario falló, no se pudo insertar la categoría.");
             }
 
             ResultSet resultado = preparedStatement.getGeneratedKeys();
-            ParametrosPrueba parametroConvertida = null;
+            CategoriaPrueba categoriaConvertida = null;
             if (resultado.next()) {
                 int idGenerado = resultado.getInt(1);
-                parametroConvertida = new ParametrosPrueba(idGenerado, idPrueba, parametro.getNombreParametro());
+                categoriaConvertida = new CategoriaPrueba(idGenerado, idPruebaLab, categoria.getNombreCategoria());
                 
             }
             
@@ -145,7 +130,7 @@ public class ParametroDAO implements IParametroDAO {
             preparedStatement.close();
             conexion.close();
 
-            return parametroConvertida;
+            return categoriaConvertida;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
@@ -155,33 +140,26 @@ public class ParametroDAO implements IParametroDAO {
 
     // Editar
     @Override
-    public ParametrosPrueba editarParametro(int id, ParametroDTO parametro) throws PersistenciaException {
+    public CategoriaPrueba editarCategoria(int id, CategoriaDTO categoria) throws PersistenciaException {
         try (Connection conexion = this.conexionBD.crearConexion()) {
-            // Obtener el ID de la prueba
-            //int id = obtenerIDParametro(parametro, conexion);
-            //if (id == -1) {
-            //    throw new PersistenciaException("No se encontró la prueba a actualizar.");
-            //}
-
-            // Actualizar la prueba
             String updateSQL = """
-                           UPDATE ParametrosPrueba SET
-                               idPrueba = ?,
-                               nombreParametro = ?
+                           UPDATE CategoriaPrueba SET
+                               idPruebaLab = ?,
+                               Categoria = ?
                            WHERE id = ?;
                            """;
             try (PreparedStatement updateStatement = conexion.prepareStatement(updateSQL)) {
-                updateStatement.setInt(1, parametro.getIDPrueba());
-                updateStatement.setString(2, parametro.getNombreParametro());
+                updateStatement.setInt(1, categoria.getIdPruebaLab());
+                updateStatement.setString(2, categoria.getNombreCategoria());
                 updateStatement.setInt(3, id);
 
                 int filasAfectadas = updateStatement.executeUpdate();
                 if (filasAfectadas == 0) {
-                    throw new PersistenciaException("No se pudo actualizar el parametro.");
+                    throw new PersistenciaException("No se pudo actualizar la categoría.");
                 }
 
                 // Retornar la prueba actualizada
-                return new ParametrosPrueba(id, parametro.getIDPrueba(), parametro.getNombreParametro());
+                return new CategoriaPrueba(id, categoria.getIdPruebaLab(), categoria.getNombreCategoria());
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -191,17 +169,17 @@ public class ParametroDAO implements IParametroDAO {
 
     // Eliminar
     @Override
-    public ParametrosPrueba eliminarParametro(int id) throws PersistenciaException {
+    public CategoriaPrueba eliminarCategoria(int id) throws PersistenciaException {
         try (Connection conexion = this.conexionBD.crearConexion()) {
-            // Obtener el ID del parametro
-            ParametrosPrueba parametroEncontrado = obtenerParametro(id);
-            if (parametroEncontrado == null) {
-                throw new PersistenciaException("La eliminación falló, no se pudo encontrar el parametro.");
+            
+            CategoriaPrueba categoriaEncontrado = obtenerCategoria(id);
+            if (categoriaEncontrado == null) {
+                throw new PersistenciaException("La eliminación falló, no se pudo encontrar la categoría.");
             }
             
             // Eliminación
             String deleteSQL = """
-                           DELETE FROM ParametrosPrueba
+                           DELETE FROM CategoriaPrueba
                            WHERE id = ?;
                            """;
             try (PreparedStatement deleteStatement = conexion.prepareStatement(deleteSQL)) {
@@ -209,11 +187,11 @@ public class ParametroDAO implements IParametroDAO {
 
                 int filasAfectadas = deleteStatement.executeUpdate();
                 if (filasAfectadas == 0) {
-                    throw new PersistenciaException("No se pudo eliminar el parámetro.");
+                    throw new PersistenciaException("No se pudo eliminar la categoría.");
                 }
 
                 // Retornar la prueba eliminada
-                return parametroEncontrado;
+                return categoriaEncontrado;
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

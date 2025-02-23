@@ -12,6 +12,7 @@ C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\Labor
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\PruebaDTO.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\UsuarioDTO.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\AnalisisDetalleDAO.java
+C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ResultadoTablaDTO.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ResultadoDAO.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\ParametroNegocio.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\AnalisisDetalle.java
@@ -51,9 +52,11 @@ C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\Labor
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\PruebaNegocio.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\com\mycompany\laboratorioe1\LaboratorioE1.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\EditarAnalisisDetalleDTO.java
+C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\FrmMenuPrincipal.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Utilidades\JButtonRenderer.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\Cliente.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\PruebaTablaDTO.java
+C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\AnalisisPanel.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\ClienteNegocio.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisTablaDTO.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IPruebaNegocio.java

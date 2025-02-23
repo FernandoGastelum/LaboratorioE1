@@ -8,9 +8,12 @@ import DTOS.AnalisisDTO;
 import DTOS.AnalisisTablaDTO;
 import DTOS.EditarAnalisisDTO;
 import DTOS.GuardarAnalisisDTO;
+import Entidades.AnalisisDetalle;
 import Entidades.AnalisisLaboratorio;
 import Persistencia.IAnalisisDAO;
+import Persistencia.IAnalisisDetalleDAO;
 import Persistencia.IClienteDAO;
+import Persistencia.IPruebaDAO;
 import Persistencia.PersistenciaException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +27,14 @@ import java.util.logging.Logger;
 public class AnalisisNegocio implements IAnalisisNegocio{
     private final IAnalisisDAO analisisDAO;
     private final IClienteDAO clienteDAO;
+    private final IAnalisisDetalleDAO analisisDetalleDAO;
+    private IPruebaDAO pruebaDAO; 
 
-    public AnalisisNegocio(IAnalisisDAO analisisDAO,IClienteDAO clienteDAO) {
+    public AnalisisNegocio(IAnalisisDAO analisisDAO,IClienteDAO clienteDAO, IAnalisisDetalleDAO analisisDetalleDAO,IPruebaDAO pruebaDAO) {
         this.analisisDAO = analisisDAO;
         this.clienteDAO = clienteDAO;
+        this.analisisDetalleDAO = analisisDetalleDAO;
+        this.pruebaDAO = pruebaDAO;
     }
 
     @Override
@@ -94,14 +101,20 @@ public class AnalisisNegocio implements IAnalisisNegocio{
         String nombreCliente = clienteDAO.obtenerNombrePorId(analisis.getIdCliente());
         return new AnalisisDTO(analisis.getId(), analisis.getIdCliente(),analisis.getFechaRegistro(),nombreCliente);
     }
-    private List<AnalisisTablaDTO> convertirAnalisisTablaDTO(List<AnalisisLaboratorio> analisis) {
+    private List<AnalisisTablaDTO> convertirAnalisisTablaDTO(List<AnalisisLaboratorio> analisis) throws PersistenciaException {
         if (analisis == null) {
             return null;
         }
         List<AnalisisTablaDTO> analisisDTO = new ArrayList<>();
         for (AnalisisLaboratorio item : analisis) {
             String nombreCliente = clienteDAO.obtenerNombrePorId(item.getId());
-            AnalisisTablaDTO dato = new AnalisisTablaDTO(item.getId(), nombreCliente, item.getFechaRegistro());
+            List<AnalisisDetalle> detalles = analisisDetalleDAO.obtenerDetallesPorAnalisis(item.getId());
+            List<String> pruebas = new ArrayList<>();
+            for (AnalisisDetalle detalle : detalles) {
+                //String nombrePrueba = pruebaDAO.obtenerNombrePruebaPorId(detalle.getIdPrueba());
+                pruebas.add("PROVISIONAL");
+            }
+            AnalisisTablaDTO dato = new AnalisisTablaDTO(item.getId(), nombreCliente, item.getFechaRegistro(),pruebas);
             analisisDTO.add(dato);
         }
 

@@ -2,6 +2,7 @@ Entidades\AnalisisDetalle.class
 Persistencia\AnalisisDetalleDAO.class
 DTOS\PruebaDTO.class
 DTOS\UsuarioDTO.class
+Presentacion\AnalisisPanel.class
 Utilidades\JButtonCellEditor.class
 Negocio\IParametroNegocio.class
 DTOS\AnalisisDetalleTablaDTO.class
@@ -29,6 +30,7 @@ DTOS\ResultadoDTO.class
 Persistencia\UsuarioDAO.class
 Persistencia\IResultadoDAO.class
 DTOS\ParametroTablaDTO.class
+Presentacion\FrmMenuPrincipal.class
 DTOS\AnalisisDetalleDTO.class
 Persistencia\IParametroDAO.class
 Negocio\ClienteNegocio.class
@@ -38,12 +40,14 @@ Negocio\IUsuarioNegocio.class
 Persistencia\IAnalisisDetalleDAO.class
 Entidades\Usuario.class
 Persistencia\PersistenciaException.class
+Presentacion\FrmMenuPrincipal$2.class
 Entidades\ParametrosPrueba.class
 com\mycompany\laboratorioe1\LaboratorioE1.class
 Entidades\AnalisisLaboratorio.class
 Negocio\UsuarioNegocio.class
 DTOS\ClientesTablaDTO.class
 Presentacion\Temporal.class
+Presentacion\FrmMenuPrincipal$1.class
 DTOS\EditarAnalisisDetalleDTO.class
 Persistencia\PruebaDAO.class
 Persistencia\ResultadoDAO.class
@@ -51,6 +55,7 @@ Negocio\AnalisisDetalleNegocio.class
 Utilidades\JButtonRenderer.class
 DTOS\AnalisisTablaDTO.class
 DTOS\ParametroDTO.class
+DTOS\ResultadoTablaDTO.class
 Persistencia\IClienteDAO.class
 DTOS\GuardarAnalisisDTO.class
 Negocio\ParametroNegocio.class

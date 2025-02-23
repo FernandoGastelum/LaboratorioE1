@@ -29,8 +29,10 @@ import Persistencia.IAnalisisDAO;
 import Persistencia.IAnalisisDetalleDAO;
 import Persistencia.IClienteDAO;
 import Persistencia.IConexionBD;
+import Persistencia.IPruebaDAO;
 import Persistencia.IResultadoDAO;
 import Persistencia.PersistenciaException;
+import Persistencia.PruebaDAO;
 import Persistencia.ResultadoDAO;
 import java.sql.Connection;
 import java.util.Date;
@@ -74,16 +76,16 @@ public class Temporal {
         }
     }
     public void ConsultarAnalisisLaboratorioID(){
-        try {
-            IConexionBD conexion = new ConexionBD();
-            IAnalisisDAO analisisDAO = new AnalisisDAO(conexion);
-            IClienteDAO clienteDAO = new ClienteDAO(conexion);
-            IAnalisisNegocio analisisNegocio = new AnalisisNegocio(analisisDAO, clienteDAO);
-            AnalisisDTO analisisBD = analisisNegocio.obtenerAnalisisPorId(1);
-            System.out.println(analisisBD);
-        } catch (NegocioException e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            IConexionBD conexion = new ConexionBD();
+//            IAnalisisDAO analisisDAO = new AnalisisDAO(conexion);
+//            IClienteDAO clienteDAO = new ClienteDAO(conexion);
+//            IAnalisisNegocio analisisNegocio = new AnalisisNegocio(analisisDAO, clienteDAO);
+//            AnalisisDTO analisisBD = analisisNegocio.obtenerAnalisisPorId(1);
+//            System.out.println(analisisBD);
+//        } catch (NegocioException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
     public void EliminarAnalisisLaboratorio(){
         try {
@@ -198,6 +200,12 @@ public class Temporal {
     }
     public static void main(String[] args) {
         Temporal temp = new Temporal();
-        temp.eliminarResultado();
+        IConexionBD conexion = new ConexionBD();
+        IClienteDAO clienteDAO = new ClienteDAO(conexion);
+        IAnalisisDetalleDAO analisisDetalleDAO = new AnalisisDetalleDAO(conexion);
+        IPruebaDAO pruebaDAO = new PruebaDAO(conexion);
+        IAnalisisDAO analisisDAO = new AnalisisDAO(conexion);
+        IAnalisisNegocio analisisNegocio = new AnalisisNegocio(analisisDAO, clienteDAO, analisisDetalleDAO, pruebaDAO);
+        FrmMenuPrincipal frmPrincipal = new FrmMenuPrincipal(analisisNegocio);
     }
 }

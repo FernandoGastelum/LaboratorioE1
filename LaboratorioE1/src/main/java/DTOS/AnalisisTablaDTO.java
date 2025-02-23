@@ -5,6 +5,7 @@
 package DTOS;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -14,13 +15,23 @@ public class AnalisisTablaDTO {
     private int idAnalisis;
     private String nombreCliente;
     private Date fechaRegistro;
+    private List<String> pruebasAsociadas;
 
     public AnalisisTablaDTO() {}
 
-    public AnalisisTablaDTO(int idAnalisis, String nombreCliente, Date fechaRegistro) {
+    public AnalisisTablaDTO(int idAnalisis, String nombreCliente, Date fechaRegistro,List<String> pruebasAsociadas) {
         this.idAnalisis = idAnalisis;
         this.nombreCliente = nombreCliente;
         this.fechaRegistro = fechaRegistro;
+        this.pruebasAsociadas = pruebasAsociadas;
+    }
+
+    public List<String> getPruebasAsociadas() {
+        return pruebasAsociadas;
+    }
+
+    public void setPruebasAsociadas(List<String> pruebasAsociadas) {
+        this.pruebasAsociadas = pruebasAsociadas;
     }
 
     public int getIdAnalisis() {
@@ -49,10 +60,8 @@ public class AnalisisTablaDTO {
 
     @Override
     public String toString() {
-        return "AnalisisTablaDTO{" +
-                "idAnalisis=" + idAnalisis +
-                ", nombreCliente='" + nombreCliente + "'" +
-                ", fechaRegistro=" + fechaRegistro +
-                '}';
+        return "AnalisisTablaDTO{" + "idAnalisis=" + idAnalisis + ", nombreCliente=" + nombreCliente + ", fechaRegistro=" + fechaRegistro + ", pruebasAsociadas=" + pruebasAsociadas + '}';
     }
+
+    
 }

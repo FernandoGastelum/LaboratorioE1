@@ -207,5 +207,6 @@ public class Temporal {
         IAnalisisDAO analisisDAO = new AnalisisDAO(conexion);
         IAnalisisNegocio analisisNegocio = new AnalisisNegocio(analisisDAO, clienteDAO, analisisDetalleDAO, pruebaDAO);
         FrmMenuPrincipal frmPrincipal = new FrmMenuPrincipal(analisisNegocio);
+        frmPrincipal.setVisible(true);
     }
 }

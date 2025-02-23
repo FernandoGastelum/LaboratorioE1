@@ -96,6 +96,7 @@ public class AnalisisDAO implements IAnalisisDAO{
         try (Connection conexion = conexionBD.crearConexion();
             PreparedStatement stmt = conexion.prepareStatement(consulta)) {
             stmt.setInt(1, analisis.getIdCliente());
+            stmt.setInt(2, analisis.getIdAnalisis());
             
             int filasAfectadas = stmt.executeUpdate();
             if (filasAfectadas == 0) {

@@ -14,10 +14,10 @@ import java.sql.SQLException;
  * @author Ilian Fernando Gastelum Romo 228761
  */
 public class ClienteDAO implements IClienteDAO{
-    private final Connection conexion;
+    private IConexionBD conexionBD;
 
-    public ClienteDAO(Connection conexion) {
-        this.conexion = conexion;
+    public ClienteDAO(IConexionBD conexion) {
+        this.conexionBD = conexion;
     }
 
     @Override
@@ -25,7 +25,8 @@ public class ClienteDAO implements IClienteDAO{
         String nombre = "";
         String sql = "SELECT CONCAT(nombre, ' ', apellidoPaterno, ' ', apellidoMaterno) FROM Clientes WHERE id = ?";
 
-        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+        try (Connection conexion = conexionBD.crearConexion();
+             PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setInt(1, idCliente);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {

@@ -13,14 +13,12 @@ import java.util.Date;
 public class EditarAnalisisDTO {
     private int idAnalisis;
     private int idCliente;
-    private Date fechaRegistro;
 
     public EditarAnalisisDTO() {}
 
-    public EditarAnalisisDTO(int idAnalisis, int idCliente, Date fechaRegistro) {
+    public EditarAnalisisDTO(int idAnalisis, int idCliente) {
         this.idAnalisis = idAnalisis;
         this.idCliente = idCliente;
-        this.fechaRegistro = fechaRegistro;
     }
 
     public int getIdAnalisis() {
@@ -39,20 +37,12 @@ public class EditarAnalisisDTO {
         this.idCliente = idCliente;
     }
 
-    public Date getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
 
     @Override
     public String toString() {
         return "EditarAnalisisDTO{" +
                 "idAnalisis=" + idAnalisis +
                 ", idCliente=" + idCliente +
-                ", fechaRegistro=" + fechaRegistro +
                 '}';
     }
 }

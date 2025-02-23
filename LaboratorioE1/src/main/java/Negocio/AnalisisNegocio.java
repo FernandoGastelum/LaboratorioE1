@@ -81,6 +81,7 @@ public class AnalisisNegocio implements IAnalisisNegocio{
     public List<AnalisisTablaDTO> listarAnalisis() throws NegocioException {
         try {
             List<AnalisisLaboratorio> analisisLista = this.analisisDAO.BuscarAnalisis();
+            
             return this.convertirAnalisisTablaDTO(analisisLista);
         } catch (PersistenciaException ex) {
             throw new NegocioException(ex.getMessage());
@@ -90,8 +91,8 @@ public class AnalisisNegocio implements IAnalisisNegocio{
         if (analisis == null) {
             return null;
         }
-
-        return new AnalisisDTO(analisis.getId(), analisis.getIdCliente(),analisis.getFechaRegistro());
+        String nombreCliente = clienteDAO.obtenerNombrePorId(analisis.getIdCliente());
+        return new AnalisisDTO(analisis.getId(), analisis.getIdCliente(),analisis.getFechaRegistro(),nombreCliente);
     }
     private List<AnalisisTablaDTO> convertirAnalisisTablaDTO(List<AnalisisLaboratorio> analisis) {
         if (analisis == null) {

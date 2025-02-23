@@ -4,6 +4,7 @@ DTOS\PruebaDTO.class
 DTOS\UsuarioDTO.class
 Utilidades\JButtonCellEditor.class
 Negocio\IParametroNegocio.class
+DTOS\AnalisisDetalleTablaDTO.class
 Entidades\Cliente.class
 Persistencia\ClienteDAO.class
 Persistencia\ParametroDAO.class
@@ -28,6 +29,7 @@ DTOS\ResultadoDTO.class
 Persistencia\UsuarioDAO.class
 Persistencia\IResultadoDAO.class
 DTOS\ParametroTablaDTO.class
+DTOS\AnalisisDetalleDTO.class
 Persistencia\IParametroDAO.class
 Negocio\ClienteNegocio.class
 DTOS\GuardarAnalisisDetalleDTO.class

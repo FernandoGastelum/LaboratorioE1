@@ -17,6 +17,8 @@ import java.util.List;
 public interface IAnalisisDetalleDAO {
     List<AnalisisDetalle> obtenerDetallesPorAnalisis(int idAnalisis) throws PersistenciaException;
     
+    List<AnalisisDetalle> BuscarAnalisisDetalles() throws PersistenciaException;
+    
     AnalisisDetalle guardar(GuardarAnalisisDetalleDTO detalle) throws PersistenciaException;
 
     AnalisisDetalle actualizar(EditarAnalisisDetalleDTO detalle) throws PersistenciaException;

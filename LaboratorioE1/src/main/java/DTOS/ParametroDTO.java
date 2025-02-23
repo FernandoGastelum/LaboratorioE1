@@ -10,19 +10,29 @@ package DTOS;
  * @author Ángel Ruíz García - 00000248171
  */
 public class ParametroDTO {
-
+    
+    private int IDPrueba;
     private String nombreParametro;
 
-    public ParametroDTO(String nombreParametro) {
+    public ParametroDTO(int IDPrueba, String nombreParametro) {
+        this.IDPrueba = IDPrueba;
         this.nombreParametro = nombreParametro;
+    }
+
+    public int getIDPrueba() {
+        return IDPrueba;
+    }
+    public void setIDPrueba(int IDPrueba) {
+        this.IDPrueba = IDPrueba;
     }
 
     public String getNombreParametro() {
         return nombreParametro;
     }
-
     public void setNombreParametro(String nombreParametro) {
         this.nombreParametro = nombreParametro;
     }
+    
+    
 
 }

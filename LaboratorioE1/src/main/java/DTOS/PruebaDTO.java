@@ -12,11 +12,9 @@ package DTOS;
 public class PruebaDTO {
 
     private String nombrePrueba;
-    private String categoria;
 
-    public PruebaDTO(String nombrePrueba, String categoria) {
+    public PruebaDTO(String nombrePrueba) {
         this.nombrePrueba = nombrePrueba;
-        this.categoria = categoria;
     }
 
     public String getNombrePrueba() {
@@ -25,14 +23,6 @@ public class PruebaDTO {
 
     public void setNombrePrueba(String nombrePrueba) {
         this.nombrePrueba = nombrePrueba;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
 
 }

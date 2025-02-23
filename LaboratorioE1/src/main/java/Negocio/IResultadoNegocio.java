@@ -6,7 +6,7 @@ package Negocio;
 
 /**
  *
- * @author gaspa
+ * @author Ilian Fernando Gastelum Romo 228761
  */
 public interface IResultadoNegocio {
     

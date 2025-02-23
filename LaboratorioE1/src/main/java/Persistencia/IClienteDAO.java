@@ -6,8 +6,8 @@ package Persistencia;
 
 /**
  *
- * @author gaspa
+ * @author Ilian Fernando Gastelum Romo 228761
  */
 public interface IClienteDAO {
-    
+    public String obtenerNombrePorId(int idCliente);
 }

@@ -32,7 +32,5 @@ public class ParametroDTO {
     public void setNombreParametro(String nombreParametro) {
         this.nombreParametro = nombreParametro;
     }
-    
-    
 
 }

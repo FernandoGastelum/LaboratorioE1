@@ -4,6 +4,8 @@
  */
 package DTOS;
 
+import java.util.List;
+
 /**
  * Elementos que el usuario guardara en las pruebas de laboratorio.
  *
@@ -12,9 +14,20 @@ package DTOS;
 public class PruebaDTO {
 
     private String nombrePrueba;
+    private String categoria;
+    private List<String> parametros;
 
+    public PruebaDTO() {
+    }
+    
     public PruebaDTO(String nombrePrueba) {
         this.nombrePrueba = nombrePrueba;
+    }
+
+    public PruebaDTO(String nombrePrueba, String categoria, List<String> parametros) {
+        this.nombrePrueba = nombrePrueba;
+        this.categoria = categoria;
+        this.parametros = parametros;
     }
 
     public String getNombrePrueba() {
@@ -23,6 +36,22 @@ public class PruebaDTO {
 
     public void setNombrePrueba(String nombrePrueba) {
         this.nombrePrueba = nombrePrueba;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<String> getParametros() {
+        return parametros;
+    }
+
+    public void setParametros(List<String> parametros) {
+        this.parametros = parametros;
     }
 
 }

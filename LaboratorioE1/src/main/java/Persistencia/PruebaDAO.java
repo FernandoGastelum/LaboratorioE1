@@ -126,38 +126,80 @@ public class PruebaDAO implements IPruebaDAO {
     // Guardar
     @Override
     public PruebaLaboratorio guardarPrueba(PruebaDTO prueba) throws PersistenciaException {
+        Connection conexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultado = null;
+
         try {
-            Connection conexion = this.conexionBD.crearConexion();
+            conexion = this.conexionBD.crearConexion();
             String insertPrueba = """
-                                    INSERT INTO PruebasLaboratorio 
-                                    (nombrePrueba)
-                                    VALUES (?);
-                                    """;
-            PreparedStatement preparedStatement = conexion.prepareStatement(insertPrueba, Statement.RETURN_GENERATED_KEYS);
+                                INSERT INTO PruebasLaboratorio 
+                                (nombrePrueba)
+                                VALUES (?);
+                              """;
+            preparedStatement = conexion.prepareStatement(insertPrueba, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, prueba.getNombrePrueba());
 
             int filasAfectadas = preparedStatement.executeUpdate();
             if (filasAfectadas == 0) {
-                throw new PersistenciaException("La inserción del usuario falló, no se pudo insertar la prueba.");
+                throw new PersistenciaException("La inserción de la prueba falló, no se pudo insertar la prueba.");
             }
 
-            ResultSet resultado = preparedStatement.getGeneratedKeys();
+            resultado = preparedStatement.getGeneratedKeys();
             PruebaLaboratorio pruebaConvertida = null;
             if (resultado.next()) {
                 int idGenerado = resultado.getInt(1);
                 pruebaConvertida = new PruebaLaboratorio(idGenerado, prueba.getNombrePrueba());
-            }
 
-            resultado.close();
-            preparedStatement.close();
-            conexion.close();
+                // Guardar los parámetros asociados
+                if (prueba.getParametros() != null && !prueba.getParametros().isEmpty()) {
+                    String insertParametro = """
+                                         INSERT INTO ParametrosPrueba (idPrueba, nombreParametro)
+                                         VALUES (?, ?);
+                                        """;
+                    for (String parametro : prueba.getParametros()) {
+                        try (PreparedStatement psParametro = conexion.prepareStatement(insertParametro)) {
+                            psParametro.setInt(1, idGenerado); // Relacionamos el parámetro con la prueba
+                            psParametro.setString(2, parametro);
+                            psParametro.executeUpdate();
+                        }
+                    }
+                }
+
+                // Guardar la categoria asociada
+                if (prueba.getCategoria() != null && !prueba.getCategoria().isEmpty()) {
+                    String insertCategoria = """
+                                         INSERT INTO CategoriaPrueba (idPruebaLab, nombreCategoria)
+                                         VALUES (?, ?);
+                                        """;
+
+                    try (PreparedStatement categoria = conexion.prepareStatement(insertCategoria)) {
+                        categoria.setInt(1, idGenerado);
+                        categoria.setString(2, prueba.getCategoria());
+                        categoria.executeUpdate();
+                    }
+
+                }
+            }
 
             return pruebaConvertida;
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-            throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
+            throw new PersistenciaException("Ocurrió un error al leer la base de datos.");
+        } finally {
+            try {
+                if (resultado != null) {
+                    resultado.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();  // Manejo de errores en el cierre de conexiones.
+            }
         }
-
     }
 
     // Editar
@@ -252,6 +294,4 @@ public class PruebaDAO implements IPruebaDAO {
             throw new PersistenciaException(ex.getMessage());
         }
     }
-    
-
 }

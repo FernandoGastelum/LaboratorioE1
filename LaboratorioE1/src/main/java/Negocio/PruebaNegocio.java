@@ -57,7 +57,6 @@ public class PruebaNegocio implements IPruebaNegocio {
     public int guardarPrueba(PruebaDTO prueba) throws NegocioException {
         try {
             PruebaLaboratorio pruebaGuardada = this.pruebaDAO.guardarPrueba(prueba);
-            //return this.convertirPruebaDTO(pruebaGuardada);
             return pruebaGuardada.getId();
         } catch (PersistenciaException ex) {
             throw new NegocioException(ex.getMessage());

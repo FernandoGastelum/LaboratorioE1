@@ -27,4 +27,8 @@ public interface IPruebaDAO {
     PruebaLaboratorio eliminarPrueba(int id) throws PersistenciaException;
     
     PruebaLaboratorio obtenerPrueba(int id) throws PersistenciaException;
+    
+    PruebaLaboratorio obtenerPruebaPorNombre(String prueba) throws PersistenciaException;
+    
+    
 }

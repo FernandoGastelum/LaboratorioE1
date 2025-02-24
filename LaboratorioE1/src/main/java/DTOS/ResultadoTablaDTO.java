@@ -16,6 +16,8 @@ public class ResultadoTablaDTO {
     private String nombreParametro;
     private String valor;
     private Date fechaRegistro;
+    private int idAnalisisDetalle;
+    private int idParametro;
 
     public ResultadoTablaDTO(int idResultado, String nombrePrueba, String nombreParametro, String valor, Date fechaRegistro) {
         this.idResultado = idResultado;
@@ -24,6 +26,30 @@ public class ResultadoTablaDTO {
         this.valor = valor;
         this.fechaRegistro = fechaRegistro;
     }
+
+    public ResultadoTablaDTO(String nombreParametro, String valor, int idAnalisisDetalle, int idParametro) {
+        this.nombreParametro = nombreParametro;
+        this.valor = valor;
+        this.idAnalisisDetalle = idAnalisisDetalle;
+        this.idParametro = idParametro;
+    }
+
+    public int getIdAnalisisDetalle() {
+        return idAnalisisDetalle;
+    }
+
+    public void setIdAnalisisDetalle(int idAnalisisDetalle) {
+        this.idAnalisisDetalle = idAnalisisDetalle;
+    }
+
+    public int getIdParametro() {
+        return idParametro;
+    }
+
+    public void setIdParametro(int idParametro) {
+        this.idParametro = idParametro;
+    }
+    
 
     // Getters y Setters
     public int getIdResultado() {

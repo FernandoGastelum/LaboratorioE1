@@ -6,6 +6,8 @@ package Negocio;
 
 import DTOS.ParametroDTO;
 import DTOS.ParametroTablaDTO;
+import Entidades.ParametrosPrueba;
+import Persistencia.PersistenciaException;
 import java.util.List;
 
 /**
@@ -22,4 +24,6 @@ public interface IParametroNegocio {
     ParametroDTO editarParametro(int id, ParametroDTO parametro) throws NegocioException;
 
     ParametroDTO eliminarParametro(int id) throws NegocioException;
+    
+    List<ParametroDTO> obtenerParametrosPorPrueba(int idPrueba) throws NegocioException;
 }

@@ -90,4 +90,25 @@ public class ParametroNegocio implements IParametroNegocio {
         }
     }
 
+    @Override
+    public List<ParametroDTO> obtenerParametrosPorPrueba(int idPrueba) throws NegocioException {
+        try {
+            List<ParametrosPrueba> pruebas = this.parametroDAO.obtenerParametrosPorPrueba(idPrueba);
+            return this.convertirParametrosTablaDTO(pruebas);
+        } catch (PersistenciaException ex) {
+            throw new NegocioException(ex.getMessage());
+        }
+    }
+    private List<ParametroDTO> convertirParametrosTablaDTO(List<ParametrosPrueba> parametros) {
+        if (parametros == null) {
+            return null;
+        }
+        List<ParametroDTO> parametrosDTO = new ArrayList<>();
+        for (ParametrosPrueba parametro : parametros) {
+            ParametroDTO dato = new ParametroDTO(parametro.getId(),parametro.getId(),parametro.getNombreParametro());
+            parametrosDTO.add(dato);
+        }
+        return parametrosDTO;
+    }
+
 }

@@ -294,4 +294,25 @@ public class PruebaDAO implements IPruebaDAO {
             throw new PersistenciaException(ex.getMessage());
         }
     }
+
+    @Override
+    public PruebaLaboratorio obtenerPruebaPorNombre(String prueba) throws PersistenciaException {
+        String consulta = """
+                                 SELECT 
+                                    id
+                                 FROM PruebasLaboratorio WHERE nombrePrueba = ?;
+                                 """;
+        try (Connection conexion = conexionBD.crearConexion();
+            PreparedStatement stmt = conexion.prepareStatement(consulta)) {
+            stmt.setString(1, prueba);
+            ResultSet resultado = stmt.executeQuery();
+            if(resultado.next()){
+                return convertirPrueba(resultado);
+            }else{
+                throw new PersistenciaException("No se encontraron resultados con el nombre proporcionado");
+            }
+        } catch (SQLException ex) {
+            throw new PersistenciaException(ex.getMessage());
+        }
+    }
 }

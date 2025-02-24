@@ -10,6 +10,7 @@ import Negocio.IParametroNegocio;
 import Negocio.IPruebaNegocio;
 import Negocio.IClienteNegocio;
 import Negocio.IPruebaNegocio;
+import Negocio.IResultadoNegocio;
 import Utilidades.PanelManager;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -30,8 +31,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private IAnalisisNegocio analisisNegocio;
     private ICategoriaNegocio categoriaNegocio;
     private IParametroNegocio parametroNegocio;
+    private IResultadoNegocio resultadoNegocio;
     private PanelManager panel;
-    public FrmMenuPrincipal(IAnalisisNegocio analisisNegocio, IPruebaNegocio pruebaNegocio, ICategoriaNegocio categoriaNegocio, IParametroNegocio parametroNegocio) {
+    public FrmMenuPrincipal(IAnalisisNegocio analisisNegocio, IPruebaNegocio pruebaNegocio, 
+            ICategoriaNegocio categoriaNegocio, IParametroNegocio parametroNegocio,
+            IResultadoNegocio resultadoNegocio,IClienteNegocio clienteNegocio) {
     
         initComponents();
         this.panel = new PanelManager(MainPanel);
@@ -39,6 +43,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         this.pruebaNegocio = pruebaNegocio;
         this.categoriaNegocio = categoriaNegocio;
         this.parametroNegocio = parametroNegocio;
+        this.resultadoNegocio = resultadoNegocio;
+        this.clienteNegocio = clienteNegocio;
     }
 
     public JPanel getMainPanel() {
@@ -232,7 +238,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_analisisBTNActionPerformed
 
     private void resultadosBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultadosBTNActionPerformed
-        ResultadosPanel resultadosPanel = new ResultadosPanel(panel, analisisNegocio);
+        ResultadosPanel resultadosPanel = new ResultadosPanel(panel, analisisNegocio, resultadoNegocio,parametroNegocio);
         panel.cambiarPanel(resultadosPanel);
     }//GEN-LAST:event_resultadosBTNActionPerformed
 

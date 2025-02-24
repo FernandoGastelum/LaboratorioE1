@@ -6,10 +6,18 @@ package Negocio;
 
 import DTOS.EditarResultadoDTO;
 import DTOS.GuardarResultadoDTO;
+import DTOS.ParametroDTO;
+import DTOS.ParametroTablaDTO;
 import DTOS.ResultadoDTO;
+import DTOS.ResultadoParametroAnalisisTablaDTO;
 import DTOS.ResultadoTablaDTO;
+import Entidades.AnalisisDetalle;
+import Entidades.ParametrosPrueba;
 import Entidades.Resultado;
+import Entidades.ResultadoParametroAnalisis;
+import Persistencia.IAnalisisDetalleDAO;
 import Persistencia.IClienteDAO;
+import Persistencia.IParametroDAO;
 import Persistencia.IResultadoDAO;
 import Persistencia.PersistenciaException;
 import java.util.ArrayList;
@@ -21,8 +29,12 @@ import java.util.List;
  */
 public class ResultadoNegocio implements IResultadoNegocio{
     private final IResultadoDAO resultadoDAO;
-    public ResultadoNegocio(IResultadoDAO resultadoDAO){
+    private final IAnalisisDetalleDAO analisisDetalleDAO;
+    private final IParametroDAO parametroPruebaDAO;
+    public ResultadoNegocio(IResultadoDAO resultadoDAO,IAnalisisDetalleDAO analisisDetalleDAO,IParametroDAO parametroPruebaDAO){
+        this.analisisDetalleDAO = analisisDetalleDAO;
         this.resultadoDAO = resultadoDAO;
+        this.parametroPruebaDAO = parametroPruebaDAO;
         
     }
     @Override
@@ -71,6 +83,35 @@ public class ResultadoNegocio implements IResultadoNegocio{
             throw new NegocioException(ex.getMessage());
         }
     }
+    @Override
+    public List<ParametroTablaDTO> obtenerParametrosPorAnalisis(int idAnalisis) throws NegocioException {
+        try {
+            // Obtener los detalles del análisis
+            List<AnalisisDetalle> detalles = analisisDetalleDAO.obtenerDetallesPorAnalisis(idAnalisis);
+            List<ParametroTablaDTO> parametrosDTO = new ArrayList<>();
+
+            for (AnalisisDetalle detalle : detalles) {
+                // Obtener parámetros por prueba
+                List<ParametrosPrueba> parametros = parametroPruebaDAO.obtenerParametrosPorPrueba(detalle.getIdPrueba());
+                for (ParametrosPrueba parametro : parametros) {
+                    parametrosDTO.add(new ParametroTablaDTO(parametro.getNombreParametro()));
+                }
+            }
+            return parametrosDTO;
+        } catch (PersistenciaException e) {
+            throw new NegocioException("Error al obtener los parámetros del análisis.");
+        }
+    }
+    
+    @Override
+    public List<Integer> obtenerAnalisisDetallePorIdAnalisis(int idAnalisis) throws NegocioException {
+        try {
+            List<Integer> resultadoLista = this.resultadoDAO.obtenerAnalisisDetallePorIdAnalisis(idAnalisis);
+            return resultadoLista;
+        } catch (PersistenciaException e) {
+            throw new NegocioException(e.getMessage());
+        }
+    }
 
     @Override
     public List<ResultadoTablaDTO> listarResultado() throws NegocioException {
@@ -82,11 +123,17 @@ public class ResultadoNegocio implements IResultadoNegocio{
             throw new NegocioException(ex.getMessage());
         }
     }
+    @Override
+    public int obtenerIdParametroPorAnalisisDetalle(int idAnalisisDetalle) throws NegocioException {
+        try {
+            return resultadoDAO.obtenerIdParametroPorAnalisisDetalle(idAnalisisDetalle);
+        } catch (PersistenciaException e) {
+            throw new NegocioException("Error al obtener idParametro: ");
+        }
+    }
     
     private void validarInformacionGuardarResultado(GuardarResultadoDTO resultado) throws NegocioException{
-        if (resultado.getIdAnalisisDetalle()<= 0) {
-                throw new NegocioException("El ID del analisis no es válido.");
-        }
+        
         if (resultado.getIdParametro()<= 0) {
                 throw new NegocioException("El ID del parametro no es válido.");
         }
@@ -106,6 +153,7 @@ public class ResultadoNegocio implements IResultadoNegocio{
             throw new NegocioException("El ID del resultado no es válido.");
         }
     }
+    
     private List<ResultadoTablaDTO> convertirResultadoTablaDTO(List<Resultado> resultados) {
         if (resultados == null) {
             return null;
@@ -117,10 +165,35 @@ public class ResultadoNegocio implements IResultadoNegocio{
         }
         return resultadoDTO;
     }
+    
     private ResultadoDTO convertirResultadoDTO(Resultado resultado) {
         if (resultado == null) {
             return null;
         }
-        return new ResultadoDTO(resultado.getId(),resultado.getIdAnalisisDetalle(), resultado.getIdParametro(),resultado.getValor(), resultado.getFechaRegistro());
+        return new ResultadoDTO(resultado.getId(), resultado.getIdParametro(),resultado.getValor(), resultado.getFechaRegistro());
+    }
+    
+    private List<ResultadoParametroAnalisisTablaDTO> convertirParametroYResultadoPorAnalisisDTO(List<ResultadoParametroAnalisis> resultado) {
+        if (resultado == null) {
+            return null;
+        }
+        List<ResultadoParametroAnalisisTablaDTO> resultadoDTO = new ArrayList<>();
+        for (ResultadoParametroAnalisis item : resultado) {
+            ResultadoParametroAnalisisTablaDTO dato = new ResultadoParametroAnalisisTablaDTO(item.getIdAnalisis(), item.getNombreCliente(), item.getNombrePrueba(),item.getIdParametro(),item.getResultado(),item.getIdAnalisisDetalle());
+            resultadoDTO.add(dato);
+        }
+        return resultadoDTO;
+    }
+    
+
+    @Override
+    public List<ResultadoParametroAnalisisTablaDTO> obtenerParametrosYResultadosPorAnalisis(int idAnalisis) throws NegocioException {
+        try {
+            List<ResultadoParametroAnalisis> resultadoLista = this.resultadoDAO.obtenerParametrosYResultadosPorAnalisis(idAnalisis);
+            return this.convertirParametroYResultadoPorAnalisisDTO(resultadoLista);
+        } catch (PersistenciaException e) {
+            throw new NegocioException(e.getMessage());
+        }
+        
     }
 }

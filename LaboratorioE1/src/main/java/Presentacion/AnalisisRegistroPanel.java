@@ -45,14 +45,19 @@ public class AnalisisRegistroPanel extends javax.swing.JPanel {
         this.analisisNegocio = analisisNegocio;
         this.pruebasSeleccionadas = new ArrayList<>();
         this.panel = panel;
+        this.metodosIniciales();
+    }
+    private void metodosIniciales(){
+        this.cargarClientes();
+        this.cargarPruebas();
     }
     private void cargarClientes() {
-//        try {
-//            List<ClientesTablaDTO> clientes = clienteNegocio.obtenerClientes();
-//            this.agregarRegistrosClientesTabla(clientes);
-//        } catch (NegocioException ex) {
-//            Logger.getLogger(AnalisisRegistroPanel.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            List<ClientesTablaDTO> clientes = clienteNegocio.obtenerTodosLosClientes();
+            this.agregarRegistrosClientesTabla(clientes);
+        } catch (NegocioException ex) {
+            Logger.getLogger(AnalisisRegistroPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     private void agregarRegistrosClientesTabla(List<ClientesTablaDTO> clientesLista) {
         if (clientesLista == null) {

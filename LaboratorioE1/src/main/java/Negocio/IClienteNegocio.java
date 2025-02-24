@@ -4,10 +4,13 @@
  */
 package Negocio;
 
+import DTOS.ClientesTablaDTO;
+import java.util.List;
+
 /**
  *
  * @author gaspa
  */
 public interface IClienteNegocio {
-    
+    public List<ClientesTablaDTO> obtenerTodosLosClientes()throws NegocioException;
 }

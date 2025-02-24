@@ -3,16 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Presentacion;
-
-import DTOS.AnalisisTablaDTO;
+import DTOS.ParametroDTO;
+import DTOS.PruebaDTO;
+import DTOS.ResultadoParametroAnalisisTablaDTO;
 import Negocio.IAnalisisNegocio;
+import Negocio.IParametroNegocio;
+import Negocio.IPruebaNegocio;
+import Negocio.IResultadoNegocio;
 import Negocio.NegocioException;
 import Utilidades.JButtonCellEditor;
 import Utilidades.JButtonRenderer;
 import Utilidades.PanelManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -28,24 +36,32 @@ public class ResultadosPanel extends javax.swing.JPanel {
      * Creates new form ResultadosPanel
      */
     private IAnalisisNegocio analisisNegocio;
-    private PanelManager panel;
-    public ResultadosPanel(PanelManager panel,IAnalisisNegocio analisisNegocio) {
+    private final PanelManager panel;
+    private final IResultadoNegocio resultadoNegocio;
+    private final IParametroNegocio parametroNegocio;
+    public ResultadosPanel(PanelManager panel,IAnalisisNegocio analisisNegocio, IResultadoNegocio resultadoNegocio,IParametroNegocio parametroNegocio) {
         initComponents();
         this.panel=panel;
         this.analisisNegocio = analisisNegocio;
+        this.resultadoNegocio = resultadoNegocio;
+        this.parametroNegocio=parametroNegocio;
         this.metodosIniciales();
     }
     private void metodosIniciales(){
         this.limpiarTabla();
         this.cargarConfiguracionInicialTabla();
-        this.buscarAnalisisParaTabla();
+        //this.buscarAnalisisParaTabla();
     }
     private void cargarConfiguracionInicialTabla() {
         ActionListener onEditarClickListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Metodo para editar
-                editar();
+                try {
+                    //Metodo para editar
+                    editar();
+                } catch (NegocioException ex) {
+                    Logger.getLogger(ResultadosPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         };
         int indiceColumnaEditar = 4;
@@ -69,10 +85,23 @@ public class ResultadosPanel extends javax.swing.JPanel {
         modeloColumnas.getColumn(indiceColumnaEliminar)
                 .setCellEditor(new JButtonCellEditor("Eliminar", onEliminarClickListener));
     }
-    private void editar() {
-        int id = this.getIdSeleccionadoTabla();
-        System.out.println("El id que se va a editar es " + id);
-        ResultadosCapturaPanel panelCapturaResultados = new ResultadosCapturaPanel(panel, analisisNegocio);
+    private void editar() throws NegocioException {
+        int idAnalisis = this.getIdSeleccionadoTabla();
+        if (idAnalisis == 0) {
+            JOptionPane.showMessageDialog(this, "Selecciona un análisis para editar", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Obtener la lista de parámetros asociados al análisis seleccionado
+        List<ParametroDTO> parametros = buscaridParametros(idAnalisis);
+
+        // Obtener la lista de resultados actuales del análisis
+        List<ResultadoParametroAnalisisTablaDTO> resultados = resultadoNegocio.obtenerParametrosYResultadosPorAnalisis(idAnalisis);
+
+        // Crear el panel de captura de resultados y pasarle los datos
+        ResultadosCapturaPanel panelCapturaResultados = new ResultadosCapturaPanel(panel, analisisNegocio, idAnalisis, resultadoNegocio, parametros, resultados,parametroNegocio);
+
+        // Cambiar al nuevo panel
         panel.cambiarPanel(panelCapturaResultados);
     }
 
@@ -107,31 +136,50 @@ public class ResultadosPanel extends javax.swing.JPanel {
             return 0;
         }
     }
-    private void buscarAnalisisParaTabla() {
+    private void buscarAnalisisParaTabla(int id) {
         try {
-            List<AnalisisTablaDTO> analisisTablaLista = this.analisisNegocio.listarAnalisis();
-            this.agregarRegistrosTabla(analisisTablaLista);
+            List<ResultadoParametroAnalisisTablaDTO> resTablaLista = this.resultadoNegocio.obtenerParametrosYResultadosPorAnalisis(id);
+            this.agregarRegistrosTabla(resTablaLista);
         } catch (NegocioException ex) {
             System.out.println(ex.getMessage());
         }
     }
-    private void agregarRegistrosTabla(List<AnalisisTablaDTO> analisisLista) {
-        if (analisisLista == null) {
+    private List<ParametroDTO> buscaridParametros(int id){
+        try {
+            List <ParametroDTO> idParametros = this.parametroNegocio.obtenerParametrosPorPrueba(id);
+            return idParametros;
+        } catch (NegocioException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    private void agregarRegistrosTabla(List<ResultadoParametroAnalisisTablaDTO> resLista) {
+        if (resLista == null) {
             return;
         }
         DefaultTableModel modeloTabla = (DefaultTableModel) this.TablaAnalisis.getModel();
         modeloTabla.setRowCount(0); // Limpiar tabla antes de agregar nuevos registros
 
-        for (AnalisisTablaDTO row : analisisLista) {
+        // Usamos un HashSet para evitar duplicados
+        Set<String> registrosUnicos = new HashSet<>();
+
+        for (ResultadoParametroAnalisisTablaDTO row : resLista) {
             boolean capturado = verificarSiResultadosCapturados(row.getIdAnalisis());
 
-            Object[] fila = new Object[4];
-            fila[0] = row.getIdAnalisis();
-            fila[1] = row.getNombreCliente();
-            fila[2] = row.getPruebasAsociadas();
-            fila[3] = capturado ? "Sí" : "No"; // Mostrar si está capturado o no
+            // Generamos una clave única por análisis y prueba
+            String claveUnica = row.getIdAnalisis() + "-" + row.getNombrePrueba();
 
-            modeloTabla.addRow(fila);
+            if (!registrosUnicos.contains(claveUnica)) {
+                registrosUnicos.add(claveUnica); // Agregar al conjunto para evitar duplicados
+
+                Object[] fila = new Object[4];
+                fila[0] = row.getIdAnalisis();
+                fila[1] = row.getNombreCliente();
+                fila[2] = row.getNombrePrueba();
+                fila[3] = capturado ? "Sí" : "No"; // Mostrar si está capturado o no
+
+                modeloTabla.addRow(fila);
+            }
         }
     }
     private void limpiarTabla() {
@@ -158,7 +206,7 @@ public class ResultadosPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         filtroTextField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        buscarBTN = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaAnalisis = new javax.swing.JTable();
@@ -174,9 +222,14 @@ public class ResultadosPanel extends javax.swing.JPanel {
         filtroTextField.setColumns(50);
         filtroTextField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(102, 153, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Buscar");
+        buscarBTN.setBackground(new java.awt.Color(102, 153, 255));
+        buscarBTN.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        buscarBTN.setText("Buscar");
+        buscarBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarBTNActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Seleccione el análisis");
@@ -206,7 +259,7 @@ public class ResultadosPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(filtroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(buscarBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2))
                         .addGap(0, 699, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -218,7 +271,7 @@ public class ResultadosPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(filtroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buscarBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -227,11 +280,15 @@ public class ResultadosPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buscarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBTNActionPerformed
+        this.buscarAnalisisParaTabla(Integer.parseInt(filtroTextField.getText()));
+    }//GEN-LAST:event_buscarBTNActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaAnalisis;
+    private javax.swing.JButton buscarBTN;
     private javax.swing.JTextField filtroTextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -6,8 +6,11 @@ package Negocio;
 
 import DTOS.EditarResultadoDTO;
 import DTOS.GuardarResultadoDTO;
+import DTOS.ParametroTablaDTO;
 import DTOS.ResultadoDTO;
+import DTOS.ResultadoParametroAnalisisTablaDTO;
 import DTOS.ResultadoTablaDTO;
+import Entidades.ResultadoParametroAnalisis;
 import Persistencia.PersistenciaException;
 import java.util.List;
 
@@ -21,4 +24,9 @@ public interface IResultadoNegocio {
     ResultadoDTO actualizar(EditarResultadoDTO resultado) throws NegocioException;
     ResultadoDTO eliminar(int id) throws NegocioException;
     List<ResultadoTablaDTO> listarResultado() throws NegocioException;
+    List<ParametroTablaDTO> obtenerParametrosPorAnalisis(int idAnalisis) throws NegocioException;
+    int obtenerIdParametroPorAnalisisDetalle(int idAnalisisDetalle) throws NegocioException;
+    List<Integer> obtenerAnalisisDetallePorIdAnalisis(int idAnalisis) throws NegocioException;
+    List<ResultadoParametroAnalisisTablaDTO> obtenerParametrosYResultadosPorAnalisis(int idAnalisis) throws NegocioException;
+
 }

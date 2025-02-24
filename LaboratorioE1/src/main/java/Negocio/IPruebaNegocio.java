@@ -29,4 +29,6 @@ public interface IPruebaNegocio {
     
     PruebaDTO buscarID(int id) throws NegocioException;
     
+    PruebaDTO obtenerPruebaPorNombre(String prueba) throws NegocioException;
+
 }

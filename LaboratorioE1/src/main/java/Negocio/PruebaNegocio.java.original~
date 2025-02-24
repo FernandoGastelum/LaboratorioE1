@@ -85,14 +85,4 @@ public class PruebaNegocio implements IPruebaNegocio {
         }
     }
 
-    @Override
-    public PruebaDTO obtenerPruebaPorNombre(String prueba) throws NegocioException {
-        try {
-            PruebaLaboratorio pruebaBuscada = this.pruebaDAO.obtenerPruebaPorNombre(prueba);
-            return this.convertirPruebaDTO(pruebaBuscada);
-        } catch (PersistenciaException ex) {
-            throw new NegocioException(ex.getMessage());
-        }
-    }
-
 }

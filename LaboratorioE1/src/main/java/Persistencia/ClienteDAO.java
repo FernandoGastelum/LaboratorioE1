@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import DTOS.ClientesTablaDTO;
+import Entidades.Cliente;
+import java.util.Date;
 
 
 /**
@@ -42,26 +44,30 @@ public class ClienteDAO implements IClienteDAO {
         return nombre;
     }
 
-    public List<ClientesTablaDTO> obtenerTodosLosClientes() {
-        List<ClientesTablaDTO> listaClientes = new ArrayList<>();
-        String sql = "SELECT id, CONCAT(nombre, ' ', apellidoPaterno, ' ', apellidoMaterno), fechaNacimiento, fechaRegistro FROM Clientes";
-
+    @Override
+    public List<Cliente> obtenerTodosLosClientes() {
+        String sql = "SELECT id, CONCAT(nombre, ' ', apellidoPaterno, ' ', apellidoMaterno)AS Nombre, fechaNacimiento, fechaRegistro FROM Clientes";
+        List<Cliente> clientesLista = new ArrayList<>();
         try (Connection conexion = conexionBD.crearConexion();
              PreparedStatement stmt = conexion.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
-            
             while (rs.next()) {
-                int id = rs.getInt(1);
-                String nombreCompleto = rs.getString(2);
-                java.sql.Date fechaNacimiento = rs.getDate(3);
-                java.sql.Timestamp fechaRegistro = rs.getTimestamp(4);
-
-                listaClientes.add(new ClientesTablaDTO(id, nombreCompleto, fechaNacimiento, fechaRegistro));
+                clientesLista.add(this.convertirClienteEntidad(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return listaClientes;
+        return clientesLista;
+    }
+    private  Cliente convertirClienteEntidad(ResultSet resultado) throws SQLException {
+        int id = resultado.getInt("id");
+        String nombre = resultado.getString("Nombre");
+        String apellidoPaterno = resultado.getString("apellidoPaterno");
+        String apellidoMaterno = resultado.getString("apellidoMaterno");
+        Date fechaRegistro = resultado.getDate("fechaRegistro");
+        Date fechaNacimiento = resultado.getDate("fechaNacimiento");
+        Cliente analisisConstruido = new Cliente(id, nombre, apellidoPaterno, apellidoMaterno, fechaRegistro, fechaNacimiento);
+        return analisisConstruido;
     }
 
     public boolean insertarCliente(String nombre, String apellidoPaterno, String apellidoMaterno, java.sql.Date fechaNacimiento) {

@@ -20,9 +20,8 @@ public class ResultadoDTO {
 
     public ResultadoDTO() {}
 
-    public ResultadoDTO(int idResultado, int idAnalisisDetalle, int idParametro, String valor, Date fechaRegistro) {
+    public ResultadoDTO(int idResultado,  int idParametro, String valor, Date fechaRegistro) {
         this.idResultado = idResultado;
-        this.idAnalisisDetalle = idAnalisisDetalle;
         this.idParametro = idParametro;
         this.valor = valor;
         this.fechaRegistro = fechaRegistro;

@@ -220,5 +220,24 @@ public class ParametroDAO implements IParametroDAO {
             throw new PersistenciaException("Ocurrió un error al leer la base de datos, inténtelo de nuevo y si el error persiste comuníquese con el encargado del sistema.");
         }
     }
+    @Override
+    public List<ParametrosPrueba> obtenerParametrosPorPrueba(int idPrueba) throws PersistenciaException {
+        List<ParametrosPrueba> parametros = new ArrayList<>();
+        String sql = "SELECT id,nombreParametro FROM ParametrosPrueba WHERE idPrueba = ?";
+
+        try (Connection conexion = conexionBD.crearConexion();
+             PreparedStatement stmt = conexion.prepareStatement(sql)) {
+            stmt.setInt(1, idPrueba);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                parametros.add(new ParametrosPrueba(rs.getInt("id"),rs.getString("nombreParametro")));
+            }
+        } catch (SQLException e) {
+            throw new PersistenciaException("Error al obtener los parámetros de la prueba.");
+        }
+
+        return parametros;
+    }
 
 }

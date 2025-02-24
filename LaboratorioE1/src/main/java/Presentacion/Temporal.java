@@ -29,8 +29,10 @@ import Negocio.IAnalisisDetalleNegocio;
 import Negocio.IAnalisisNegocio;
 import Negocio.IClienteNegocio;
 import Negocio.IPruebaNegocio;
+import Negocio.IResultadoNegocio;
 import Negocio.NegocioException;
 import Negocio.PruebaNegocio;
+import Negocio.ResultadoNegocio;
 import Persistencia.AnalisisDAO;
 import Persistencia.AnalisisDetalleDAO;
 import Persistencia.CategoriaDAO;
@@ -172,7 +174,7 @@ public class Temporal {
         try {
             IConexionBD conexion = new ConexionBD();
             IResultadoDAO resultadoDAO = new ResultadoDAO(conexion);
-            GuardarResultadoDTO guardar = new GuardarResultadoDTO(3, 9, "NewGuard", new Date());
+            GuardarResultadoDTO guardar = new GuardarResultadoDTO(9, "NewGuard", new Date());
             Resultado resultadoBD = resultadoDAO.guardar(guardar);
             System.out.println(resultadoBD);
         } catch (PersistenciaException e) {
@@ -226,7 +228,9 @@ public class Temporal {
         IParametroNegocio parametroNegocio = new ParametroNegocio(parametroDAO);
         IResultadoDAO resultadoDAO = new ResultadoDAO(conexion);
         IAnalisisNegocio analisisNegocio = new AnalisisNegocio(analisisDAO, clienteDAO, analisisDetalleDAO, pruebaDAO, resultadoDAO);
-        FrmMenuPrincipal frmPrincipal = new FrmMenuPrincipal(analisisNegocio, pruebaNegocio, categoriaNegocio, parametroNegocio);
+        IResultadoNegocio resultadoNegocio = new ResultadoNegocio(resultadoDAO, analisisDetalleDAO, parametroDAO);
+        IClienteNegocio clienteNegocio = new ClienteNegocio(clienteDAO);
+        FrmMenuPrincipal frmPrincipal = new FrmMenuPrincipal(analisisNegocio, pruebaNegocio, categoriaNegocio, parametroNegocio, resultadoNegocio,clienteNegocio);
         
         frmPrincipal.setVisible(true);
         

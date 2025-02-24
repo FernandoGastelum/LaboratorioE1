@@ -20,6 +20,10 @@ public class ParametrosPrueba {
         this.idPrueba = idPrueba;
         this.nombreParametro = nombreParametro;
     }
+    public ParametrosPrueba(int id, String nombreParametro) {
+        this.id = id;
+        this.nombreParametro = nombreParametro;
+    }
 
     public int getId() {
         return id;

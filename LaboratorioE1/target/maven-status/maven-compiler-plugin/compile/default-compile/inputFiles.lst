@@ -9,6 +9,7 @@ C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\Labor
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\Temporal.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ConexionBD.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IAnalisisDetalleDAO.java
+C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ResultadoParametroAnalisisTablaDTO.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IUsuarioDAO.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\CategoriaNegocio.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\CategoriaEntidadPanel.java
@@ -74,6 +75,7 @@ C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\Labor
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\AnalisisPanel.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\ClienteNegocio.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisTablaDTO.java
+C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\ResultadoParametroAnalisis.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IPruebaNegocio.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisDTO.java
 C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\UsuarioDAO.java

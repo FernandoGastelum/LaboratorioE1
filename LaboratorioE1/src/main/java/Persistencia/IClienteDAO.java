@@ -4,10 +4,15 @@
  */
 package Persistencia;
 
+import DTOS.ClientesTablaDTO;
+import Entidades.Cliente;
+import java.util.List;
+
 /**
  *
  * @author Ilian Fernando Gastelum Romo 228761
  */
 public interface IClienteDAO {
     public String obtenerNombrePorId(int idCliente);
+    public List<Cliente> obtenerTodosLosClientes();
 }

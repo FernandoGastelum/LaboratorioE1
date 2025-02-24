@@ -12,9 +12,14 @@ package DTOS;
 public class ParametroTablaDTO {
 
     private String nombreParametro;
+    private int idParametro;
 
     public ParametroTablaDTO(String nombreParametro) {
         this.nombreParametro = nombreParametro;
+    }
+    public ParametroTablaDTO(String nombreParametro, int idParametro) {
+        this.nombreParametro = nombreParametro;
+        this.idParametro = idParametro;
     }
 
     public String getNombreParametro() {

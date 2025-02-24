@@ -18,8 +18,7 @@ public class GuardarResultadoDTO {
 
     public GuardarResultadoDTO() {}
 
-    public GuardarResultadoDTO(int idAnalisisDetalle, int idParametro, String valor, Date fechaRegistro) {
-        this.idAnalisisDetalle = idAnalisisDetalle;
+    public GuardarResultadoDTO( int idParametro, String valor, Date fechaRegistro) {
         this.idParametro = idParametro;
         this.valor = valor;
         this.fechaRegistro = fechaRegistro;

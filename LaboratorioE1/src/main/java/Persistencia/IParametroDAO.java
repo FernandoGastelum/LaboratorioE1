@@ -22,4 +22,6 @@ public interface IParametroDAO {
     ParametrosPrueba editarParametro(int id, ParametroDTO parametro) throws PersistenciaException;
 
     ParametrosPrueba eliminarParametro(int id) throws PersistenciaException;
+    
+    List<ParametrosPrueba> obtenerParametrosPorPrueba(int idPrueba) throws PersistenciaException;
 }

@@ -48,6 +48,7 @@ public class Temporal {
             GuardarAnalisisDTO guardar = new GuardarAnalisisDTO(2, new Date());
             AnalisisLaboratorio analisisBD = analisisDAO.Guardar(guardar);
             System.out.println(analisisBD);
+          
         } catch (PersistenciaException e) {
             System.out.println(e.getMessage());
         }
@@ -200,4 +201,5 @@ public class Temporal {
         Temporal temp = new Temporal();
         temp.eliminarResultado();
     }
+   
 }

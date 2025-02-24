@@ -6,8 +6,9 @@ package Entidades;
 
 /**
  *
- * @author gaspa
+ * @author gaspa,paulag
  */
 public class Usuario {
+    
     
 }

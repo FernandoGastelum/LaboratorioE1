@@ -6,7 +6,7 @@ package Persistencia;
 
 /**
  *
- * @author Ilian Fernando Gastelum Romo 228761
+ * @author Ilian Fernando Gastelum Romo 228761,pau
  */
 public interface IClienteDAO {
     public String obtenerNombrePorId(int idCliente);

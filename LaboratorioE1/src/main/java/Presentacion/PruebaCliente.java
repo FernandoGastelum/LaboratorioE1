@@ -25,7 +25,7 @@ public class PruebaCliente {
         // Convertir el cliente en DTO para mostrarlo en la tabla
         ClientesTablaDTO dto = new ClientesTablaDTO(
             cliente.getId(), 
-            cliente.getNombre() + " " + cliente.getApellidoPaterno() + " " + cliente.getApellidoMaterno(),
+            cliente.getNombre() ,cliente.getApellidoPaterno(),cliente.getApellidoMaterno(),
             cliente.getFechaNacimiento(),
             cliente.getFechaRegistro()
         );

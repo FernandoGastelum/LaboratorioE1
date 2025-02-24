@@ -7,6 +7,7 @@ package Presentacion;
 import Negocio.ICategoriaNegocio;
 import Negocio.IParametroNegocio;
 import Negocio.IPruebaNegocio;
+import java.awt.BorderLayout;
 
 /**
  *
@@ -24,7 +25,28 @@ public class CategoriaEntidadPanel extends javax.swing.JPanel {
         this.categoriaNegocio = categoriaNegocio;
         this.parametroNegocio = parametroNegocio;
     }
+    
+    
+    private void abrirPruebaEntidad() {
+        // Obtener el JFrame padre (FrmMenuPrincipal)
+        java.awt.Container parent = this.getParent();
+        while (parent != null && !(parent instanceof FrmMenuPrincipal)) {
+            parent = parent.getParent();
+        }
 
+        if (parent != null) {
+            FrmMenuPrincipal menuPrincipal = (FrmMenuPrincipal) parent;
+            PruebaEntidadPanel insPruebaEntidadPanel = new PruebaEntidadPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
+
+            // Cambiar el contenido de MainPanel en FrmMenuPrincipal
+            menuPrincipal.getMainPanel().removeAll();
+            menuPrincipal.getMainPanel().setLayout(new BorderLayout());
+            menuPrincipal.getMainPanel().add(insPruebaEntidadPanel, BorderLayout.CENTER);
+            menuPrincipal.getMainPanel().revalidate();
+            menuPrincipal.getMainPanel().repaint();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -150,13 +172,13 @@ public class CategoriaEntidadPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNombrePrueba1ActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        PruebaEntidadPanel insPruebaEntidadPanel = new PruebaEntidadPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
-        insPruebaEntidadPanel.setVisible(true);
+        
+        
+        abrirPruebaEntidad();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        PruebaEntidadPanel insPruebaEntidadPanel = new PruebaEntidadPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
-        insPruebaEntidadPanel.setVisible(true);
+        abrirPruebaEntidad();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 

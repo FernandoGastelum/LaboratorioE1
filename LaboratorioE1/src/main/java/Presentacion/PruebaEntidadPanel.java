@@ -260,7 +260,7 @@ public class PruebaEntidadPanel extends javax.swing.JPanel {
     }
     
     // Paneles
-    private void abrirPruebaEntidad() {
+    private void abrirPrueba() {
         // Obtener el JFrame padre (FrmMenuPrincipal)
         java.awt.Container parent = this.getParent();
         while (parent != null && !(parent instanceof FrmMenuPrincipal)) {
@@ -269,12 +269,52 @@ public class PruebaEntidadPanel extends javax.swing.JPanel {
 
         if (parent != null) {
             FrmMenuPrincipal menuPrincipal = (FrmMenuPrincipal) parent;
-            PruebaEntidadPanel insPruebaEntidadPanel = new PruebaEntidadPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
+            PruebaPanel insPruebaPanel = new PruebaPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
 
             // Cambiar el contenido de MainPanel en FrmMenuPrincipal
             menuPrincipal.getMainPanel().removeAll();
             menuPrincipal.getMainPanel().setLayout(new BorderLayout());
-            menuPrincipal.getMainPanel().add(insPruebaEntidadPanel, BorderLayout.CENTER);
+            menuPrincipal.getMainPanel().add(insPruebaPanel, BorderLayout.CENTER);
+            menuPrincipal.getMainPanel().revalidate();
+            menuPrincipal.getMainPanel().repaint();
+        }
+    }
+    
+    private void abrirCategoriaEntidad() {
+        // Obtener el JFrame padre (FrmMenuPrincipal)
+        java.awt.Container parent = this.getParent();
+        while (parent != null && !(parent instanceof FrmMenuPrincipal)) {
+            parent = parent.getParent();
+        }
+
+        if (parent != null) {
+            FrmMenuPrincipal menuPrincipal = (FrmMenuPrincipal) parent;
+            CategoriaEntidadPanel insCategoriaEntidadPanel = new CategoriaEntidadPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
+
+            // Cambiar el contenido de MainPanel en FrmMenuPrincipal
+            menuPrincipal.getMainPanel().removeAll();
+            menuPrincipal.getMainPanel().setLayout(new BorderLayout());
+            menuPrincipal.getMainPanel().add(insCategoriaEntidadPanel, BorderLayout.CENTER);
+            menuPrincipal.getMainPanel().revalidate();
+            menuPrincipal.getMainPanel().repaint();
+        }
+    }
+    
+    private void abrirParametroEntidad() {
+        // Obtener el JFrame padre (FrmMenuPrincipal)
+        java.awt.Container parent = this.getParent();
+        while (parent != null && !(parent instanceof FrmMenuPrincipal)) {
+            parent = parent.getParent();
+        }
+
+        if (parent != null) {
+            FrmMenuPrincipal menuPrincipal = (FrmMenuPrincipal) parent;
+            ParametroEntidadPanel insParametroEntidadPanel = new ParametroEntidadPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
+
+            // Cambiar el contenido de MainPanel en FrmMenuPrincipal
+            menuPrincipal.getMainPanel().removeAll();
+            menuPrincipal.getMainPanel().setLayout(new BorderLayout());
+            menuPrincipal.getMainPanel().add(insParametroEntidadPanel, BorderLayout.CENTER);
             menuPrincipal.getMainPanel().revalidate();
             menuPrincipal.getMainPanel().repaint();
         }
@@ -513,22 +553,19 @@ public class PruebaEntidadPanel extends javax.swing.JPanel {
         } catch (NegocioException ex) {
             System.out.println(ex.getMessage());
         }
-        abrirPruebaEntidad();
+        abrirPrueba();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
-        CategoriaEntidadPanel insCategoriaEntidadPanel = new CategoriaEntidadPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
-        insCategoriaEntidadPanel.setVisible(true);
+        abrirCategoriaEntidad();
     }//GEN-LAST:event_btnCategoriaActionPerformed
 
     private void btnParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParametroActionPerformed
-        ParametroEntidadPanel insParametroEntidadPanel = new ParametroEntidadPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
-        insParametroEntidadPanel.setVisible(true);
+        abrirParametroEntidad();
     }//GEN-LAST:event_btnParametroActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        PruebaPanel insPruebaPanel = new PruebaPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
-        insPruebaPanel.setVisible(true);
+        abrirPrueba();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 

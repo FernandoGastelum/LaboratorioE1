@@ -14,6 +14,7 @@ import Persistencia.IAnalisisDAO;
 import Persistencia.IAnalisisDetalleDAO;
 import Persistencia.IClienteDAO;
 import Persistencia.IPruebaDAO;
+import Persistencia.IResultadoDAO;
 import Persistencia.PersistenciaException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +29,15 @@ public class AnalisisNegocio implements IAnalisisNegocio{
     private final IAnalisisDAO analisisDAO;
     private final IClienteDAO clienteDAO;
     private final IAnalisisDetalleDAO analisisDetalleDAO;
-    private IPruebaDAO pruebaDAO; 
+    private final IPruebaDAO pruebaDAO; 
+    private final IResultadoDAO resultadoDAO;
 
-    public AnalisisNegocio(IAnalisisDAO analisisDAO,IClienteDAO clienteDAO, IAnalisisDetalleDAO analisisDetalleDAO,IPruebaDAO pruebaDAO) {
+    public AnalisisNegocio(IAnalisisDAO analisisDAO,IClienteDAO clienteDAO, IAnalisisDetalleDAO analisisDetalleDAO,IPruebaDAO pruebaDAO, IResultadoDAO resultadoDAO) {
         this.analisisDAO = analisisDAO;
         this.clienteDAO = clienteDAO;
         this.analisisDetalleDAO = analisisDetalleDAO;
         this.pruebaDAO = pruebaDAO;
+        this.resultadoDAO = resultadoDAO;
     }
 
     @Override
@@ -94,7 +97,7 @@ public class AnalisisNegocio implements IAnalisisNegocio{
             throw new NegocioException(ex.getMessage());
         }
     }
-    private AnalisisDTO convertirAnalisisDTO(AnalisisLaboratorio analisis) {
+    private AnalisisDTO convertirAnalisisDTO(AnalisisLaboratorio analisis) throws PersistenciaException {
         if (analisis == null) {
             return null;
         }
@@ -111,14 +114,22 @@ public class AnalisisNegocio implements IAnalisisNegocio{
             List<AnalisisDetalle> detalles = analisisDetalleDAO.obtenerDetallesPorAnalisis(item.getId());
             List<String> pruebas = new ArrayList<>();
             for (AnalisisDetalle detalle : detalles) {
-                //String nombrePrueba = pruebaDAO.obtenerNombrePruebaPorId(detalle.getIdPrueba());
-                pruebas.add("PROVISIONAL");
+                String nombrePrueba = pruebaDAO.obtenerPrueba(detalle.getIdPrueba()).getNombrePrueba();
+                pruebas.add(nombrePrueba);
             }
             AnalisisTablaDTO dato = new AnalisisTablaDTO(item.getId(), nombreCliente, item.getFechaRegistro(),pruebas);
             analisisDTO.add(dato);
         }
 
         return analisisDTO;
+    }
+    @Override
+    public boolean analisisTieneResultados(int idAnalisis) throws NegocioException {
+        try {
+            return resultadoDAO.existenResultadosParaAnalisis(idAnalisis);
+        } catch (PersistenciaException e) {
+            throw new NegocioException("Error al verificar si el análisis tiene resultados.");
+        }
     }
     private void validarInformacionGuardarAnalisis(GuardarAnalisisDTO analisis) throws NegocioException{
         if (analisis.getIdCliente() <= 0) {

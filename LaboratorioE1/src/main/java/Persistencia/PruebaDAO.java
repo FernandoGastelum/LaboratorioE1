@@ -226,6 +226,7 @@ public class PruebaDAO implements IPruebaDAO {
         }
     }
 
+    @Override
     public PruebaLaboratorio obtenerPrueba(int id) throws PersistenciaException {
         try {
 
@@ -251,5 +252,6 @@ public class PruebaDAO implements IPruebaDAO {
             throw new PersistenciaException(ex.getMessage());
         }
     }
+    
 
 }

@@ -22,26 +22,25 @@ public class AnalisisDetalleDAO implements IAnalisisDetalleDAO{
 
     @Override
     public List<AnalisisDetalle> obtenerDetallesPorAnalisis(int idAnalisis) throws PersistenciaException {
-        String query = "SELECT id, idAnalisis, idPrueba FROM AnalisisDetalle WHERE idAnalisis = ?";
-        
+        String consulta = "SELECT id, idAnalisis, idPrueba FROM AnalisisDetalle WHERE idAnalisis = ?";
+        List<AnalisisDetalle> detalles = new ArrayList<>();
+
         try (Connection conexion = conexionBD.crearConexion();
-             PreparedStatement stmt = conexion.prepareStatement(query)) {
+             PreparedStatement stmt = conexion.prepareStatement(consulta)) {
             stmt.setInt(1, idAnalisis);
             ResultSet rs = stmt.executeQuery();
-            
-            List<AnalisisDetalle> analisisDetalleLista = null;
+
             while (rs.next()) {
-                if(analisisDetalleLista==null){
-                    analisisDetalleLista = new ArrayList<>();
-                }
-                analisisDetalleLista.add(this.convertirAnalisisDetalleEntidad(rs));
+                detalles.add(new AnalisisDetalle(
+                    rs.getInt("id"),
+                    rs.getInt("idAnalisis"),
+                    rs.getInt("idPrueba")
+                ));
             }
-            rs.close();
-            stmt.close();
-            conexion.close();
-            return analisisDetalleLista;
-        } catch (SQLException ex) {
-            throw new PersistenciaException(ex.getMessage());
+
+            return detalles; // Devuelve una lista vacía si no hay registros
+        } catch (SQLException e) {
+            throw new PersistenciaException("Error al obtener detalles del análisis: " + e.getMessage());
         }
     }
 

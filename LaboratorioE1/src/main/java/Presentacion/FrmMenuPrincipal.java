@@ -8,6 +8,9 @@ import Negocio.IAnalisisNegocio;
 import Negocio.ICategoriaNegocio;
 import Negocio.IParametroNegocio;
 import Negocio.IPruebaNegocio;
+import Negocio.IClienteNegocio;
+import Negocio.IPruebaNegocio;
+import Utilidades.PanelManager;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
@@ -22,13 +25,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form FrmMenuPrincipal
      */
-    private IAnalisisNegocio analisisNegocio;
+    private IClienteNegocio clienteNegocio;
     private IPruebaNegocio pruebaNegocio;
+    private IAnalisisNegocio analisisNegocio;
     private ICategoriaNegocio categoriaNegocio;
     private IParametroNegocio parametroNegocio;
-
+    private PanelManager panel;
     public FrmMenuPrincipal(IAnalisisNegocio analisisNegocio, IPruebaNegocio pruebaNegocio, ICategoriaNegocio categoriaNegocio, IParametroNegocio parametroNegocio) {
+    
         initComponents();
+        this.panel = new PanelManager(MainPanel);
         this.analisisNegocio = analisisNegocio;
         this.pruebaNegocio = pruebaNegocio;
         this.categoriaNegocio = categoriaNegocio;
@@ -110,6 +116,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         resultadosBTN.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 36)); // NOI18N
         resultadosBTN.setText("Resultados");
         resultadosBTN.setToolTipText("");
+        resultadosBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resultadosBTNActionPerformed(evt);
+            }
+        });
 
         reportesBTN.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 36)); // NOI18N
         reportesBTN.setText("Reportes");
@@ -118,6 +129,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         analisisBTN.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 36)); // NOI18N
         analisisBTN.setText("Análisis");
         analisisBTN.setToolTipText("");
+        analisisBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                analisisBTNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -194,12 +210,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clientesBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesBTNActionPerformed
-        AnalisisPanel analisisPanel = new AnalisisPanel(analisisNegocio);
-        MainPanel.setLayout(new BorderLayout());
-        MainPanel.removeAll();
-        MainPanel.add(analisisPanel, BorderLayout.CENTER);
-        MainPanel.revalidate();
-        MainPanel.repaint();
+        
     }//GEN-LAST:event_clientesBTNActionPerformed
 
     private void pruebasBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebasBTNActionPerformed
@@ -211,6 +222,21 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         MainPanel.repaint();
     }//GEN-LAST:event_pruebasBTNActionPerformed
 
+
+        
+                                            
+
+    private void analisisBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analisisBTNActionPerformed
+        AnalisisPanel analisisPanel = new AnalisisPanel(analisisNegocio, panel, clienteNegocio, pruebaNegocio);
+        panel.cambiarPanel(analisisPanel);
+    }//GEN-LAST:event_analisisBTNActionPerformed
+
+    private void resultadosBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultadosBTNActionPerformed
+        ResultadosPanel resultadosPanel = new ResultadosPanel(panel, analisisNegocio);
+        panel.cambiarPanel(resultadosPanel);
+    }//GEN-LAST:event_resultadosBTNActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanel;

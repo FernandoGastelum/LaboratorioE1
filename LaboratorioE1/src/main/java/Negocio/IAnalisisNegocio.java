@@ -20,4 +20,5 @@ public interface IAnalisisNegocio {
     AnalisisDTO Eliminar(int idAnalisis) throws NegocioException;
     AnalisisDTO obtenerAnalisisPorId(int idAnalisis) throws NegocioException;
     List<AnalisisTablaDTO> listarAnalisis() throws NegocioException;
+    boolean analisisTieneResultados(int idAnalisis) throws NegocioException;
 }

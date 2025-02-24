@@ -26,4 +26,6 @@ public interface IResultadoDAO {
     Resultado obtenerPorID(int id) throws PersistenciaException;
     
     List<Resultado> listarResultado() throws PersistenciaException;
+    
+    boolean existenResultadosParaAnalisis(int idAnalisis) throws PersistenciaException;
 }

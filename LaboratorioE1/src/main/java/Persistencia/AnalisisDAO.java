@@ -134,6 +134,7 @@ public class AnalisisDAO implements IAnalisisDAO{
             throw new PersistenciaException(ex.getMessage());
         }
     }
+    
     private AnalisisLaboratorio convertirAnalisisEntidad(ResultSet resultado) throws SQLException {
         int id = resultado.getInt("id");
         int idCliente = resultado.getInt("idCliente");

@@ -6,9 +6,12 @@ package Presentacion;
 
 import DTOS.AnalisisTablaDTO;
 import Negocio.IAnalisisNegocio;
+import Negocio.IClienteNegocio;
+import Negocio.IPruebaNegocio;
 import Negocio.NegocioException;
 import Utilidades.JButtonCellEditor;
 import Utilidades.JButtonRenderer;
+import Utilidades.PanelManager;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,10 +29,23 @@ public class AnalisisPanel extends javax.swing.JPanel {
     /**
      * Creates new form AnalisisPanel
      */
+    private IClienteNegocio clienteNegocio;
+    private IPruebaNegocio pruebaNegocio;
     private IAnalisisNegocio analisisNegocio;
-    public AnalisisPanel(IAnalisisNegocio analisisNegocio) {
+    private PanelManager panel;
+    public AnalisisPanel(IAnalisisNegocio analisisNegocio, PanelManager panel,IClienteNegocio clienteNegocio, IPruebaNegocio pruebaNegocio) {
         initComponents();
         this.analisisNegocio = analisisNegocio;
+        this.panel=panel;
+        this.clienteNegocio = clienteNegocio;
+        this.pruebaNegocio = pruebaNegocio;
+        this.metodosIniciales();
+        
+    }
+    private void metodosIniciales(){
+        this.limpiarTabla();
+        this.cargarConfiguracionInicialTabla();
+        this.buscarAnalisisParaTabla();
     }
     private void cargarConfiguracionInicialTabla() {
         ActionListener onEditarClickListener = new ActionListener() {
@@ -100,7 +116,7 @@ public class AnalisisPanel extends javax.swing.JPanel {
         }
     }
 
-    private void buscarAlumnosParaTabla() {
+    private void buscarAnalisisParaTabla() {
         try {
             List<AnalisisTablaDTO> analisisTablaLista = this.analisisNegocio.listarAnalisis();
             this.agregarRegistrosTabla(analisisTablaLista);
@@ -122,7 +138,7 @@ public class AnalisisPanel extends javax.swing.JPanel {
             Object[] fila = new Object[3];
             fila[0] = row.getIdAnalisis();
             fila[1] = row.getNombreCliente();
-            //fila[2] = row.get();
+            fila[2] = row.getPruebasAsociadas();
 
             modeloTabla.addRow(fila);
         });
@@ -159,6 +175,11 @@ public class AnalisisPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(TableAnalisis);
 
         nuevoBTN.setText("Nuevo Analisis");
+        nuevoBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoBTNActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Analisis");
 
@@ -217,6 +238,11 @@ public class AnalisisPanel extends javax.swing.JPanel {
     private void buscarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBTNActionPerformed
     
     }//GEN-LAST:event_buscarBTNActionPerformed
+
+    private void nuevoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoBTNActionPerformed
+        AnalisisRegistroPanel analisisRegistro = new AnalisisRegistroPanel(clienteNegocio, pruebaNegocio, analisisNegocio, panel);
+        panel.cambiarPanel(analisisRegistro);
+    }//GEN-LAST:event_nuevoBTNActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

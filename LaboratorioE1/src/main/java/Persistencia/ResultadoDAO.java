@@ -165,6 +165,24 @@ public class ResultadoDAO implements IResultadoDAO{
             throw new PersistenciaException(e.getMessage());
         }
     }
+    @Override
+    public boolean existenResultadosParaAnalisis(int idAnalisis) throws PersistenciaException {
+        String query = "SELECT COUNT(*) FROM Resultados r "
+                     + "INNER JOIN AnalisisDetalle ad ON r.idAnalisisDetalle = ad.id "
+                     + "WHERE ad.idAnalisis = ?";
+        try (Connection conexion = conexionBD.crearConexion();
+             PreparedStatement stmt = conexion.prepareStatement(query)) {
+            stmt.setInt(1, idAnalisis);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            throw new PersistenciaException(e.getMessage());
+        }
+        return false;
+    }
     private Resultado convertirResultadoEntidad(ResultSet resultado) throws SQLException {
         int id = resultado.getInt("id");
         int idAnalisisDetalle = resultado.getInt("idAnalisisDetalle");

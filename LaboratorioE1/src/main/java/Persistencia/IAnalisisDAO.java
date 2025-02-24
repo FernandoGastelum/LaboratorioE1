@@ -26,4 +26,6 @@ public interface IAnalisisDAO {
     AnalisisLaboratorio ObtenerPorID(int id) throws PersistenciaException;
     
     
+    
+    
 }

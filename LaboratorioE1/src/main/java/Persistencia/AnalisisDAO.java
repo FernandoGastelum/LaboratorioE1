@@ -113,14 +113,7 @@ public class AnalisisDAO implements IAnalisisDAO{
 
     @Override
     public AnalisisLaboratorio ObtenerPorID(int id) throws PersistenciaException {
-        String consulta = """
-                          SELECT 
-                                id,
-                                idCliente,
-                                fechaRegistro
-                          FROM analisislaboratorio
-                          WHERE id = ?;
-                          """;
+        String consulta = "SELECT  id,idCliente,fechaRegistroFROM analisislaboratorioWHERE id = ?;";
         try (Connection conexion = conexionBD.crearConexion();
             PreparedStatement stmt = conexion.prepareStatement(consulta)) {
             stmt.setInt(1, id);

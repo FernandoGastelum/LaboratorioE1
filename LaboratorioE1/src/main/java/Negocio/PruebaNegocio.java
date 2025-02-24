@@ -42,30 +42,23 @@ public class PruebaNegocio implements IPruebaNegocio {
         }
     }
 
-    /**
-     * // Buscar (PENDIENTE)
-     *
-     * @Override public List<PruebaTablaDTO> tablaPrueba() throws
-     * NegocioException { try { List<PruebaLaboratorio> pruebas =
-     * this.pruebaDAO.tablaPrueba(); return
-     * this.convertirPruebaTablaDTO(pruebas); } catch (PersistenciaException ex)
-     * { throw new NegocioException(ex.getMessage()); } }
-     *
-     * private List<PruebaTablaDTO>
-     * convertirPruebaTablaDTO(List<PruebaLaboratorio> pruebas) { if (pruebas ==
-     * null) { return null; } List<PruebaTablaDTO> pruebasDTO = new
-     * ArrayList<>(); for (PruebaLaboratorio prueba : pruebas) { PruebaTablaDTO
-     * dato = new PruebaTablaDTO(prueba.getNombrePrueba(),
-     * prueba.getCategoria()); pruebasDTO.add(dato); } return pruebasDTO; }
-    *
-     */
-    
+    @Override
+    public PruebaDTO buscarID(int id) throws NegocioException {
+        try {
+            PruebaLaboratorio pruebaBuscada = this.pruebaDAO.obtenerPrueba(id);
+            return this.convertirPruebaDTO(pruebaBuscada);
+        } catch (PersistenciaException ex) {
+            throw new NegocioException(ex.getMessage());
+        }
+    }
+
     // Guardar
     @Override
-    public PruebaDTO guardarPrueba(PruebaDTO prueba) throws NegocioException {
+    public int guardarPrueba(PruebaDTO prueba) throws NegocioException {
         try {
             PruebaLaboratorio pruebaGuardada = this.pruebaDAO.guardarPrueba(prueba);
-            return this.convertirPruebaDTO(pruebaGuardada);
+            //return this.convertirPruebaDTO(pruebaGuardada);
+            return pruebaGuardada.getId();
         } catch (PersistenciaException ex) {
             throw new NegocioException(ex.getMessage());
         }

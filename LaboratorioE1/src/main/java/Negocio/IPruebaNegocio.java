@@ -21,9 +21,12 @@ public interface IPruebaNegocio {
     
     //List<PruebaTablaDTO> tablaPrueba() throws NegocioException;
 
-    PruebaDTO guardarPrueba(PruebaDTO prueba) throws NegocioException;
+    int guardarPrueba(PruebaDTO prueba) throws NegocioException;
 
     PruebaDTO editarPrueba(int id, PruebaDTO prueba) throws NegocioException;
 
     PruebaDTO eliminarPrueba(int id) throws NegocioException;
+    
+    PruebaDTO buscarID(int id) throws NegocioException;
+    
 }

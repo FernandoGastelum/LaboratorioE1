@@ -138,7 +138,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="clientesBTN" min="-2" pref="71" max="-2" attributes="0"/>
-                      <EmptySpace pref="101" max="32767" attributes="0"/>
+                      <EmptySpace pref="104" max="32767" attributes="0"/>
                       <Component id="pruebasBTN" min="-2" pref="71" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       <Component id="analisisBTN" min="-2" pref="71" max="-2" attributes="0"/>
@@ -160,6 +160,9 @@
                 <Property name="text" type="java.lang.String" value="Pruebas"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pruebasBTNActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="clientesBTN">
               <Properties>

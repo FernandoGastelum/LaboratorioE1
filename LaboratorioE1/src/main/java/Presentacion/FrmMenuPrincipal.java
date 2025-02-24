@@ -5,6 +5,9 @@
 package Presentacion;
 
 import Negocio.IAnalisisNegocio;
+import Negocio.ICategoriaNegocio;
+import Negocio.IParametroNegocio;
+import Negocio.IPruebaNegocio;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
@@ -15,13 +18,25 @@ import javax.swing.JPanel;
  * @author gaspa
  */
 public class FrmMenuPrincipal extends javax.swing.JFrame {
+
     /**
      * Creates new form FrmMenuPrincipal
      */
     private IAnalisisNegocio analisisNegocio;
-    public FrmMenuPrincipal(IAnalisisNegocio analisisNegocio) {
+    private IPruebaNegocio pruebaNegocio;
+    private ICategoriaNegocio categoriaNegocio;
+    private IParametroNegocio parametroNegocio;
+
+    public FrmMenuPrincipal(IAnalisisNegocio analisisNegocio, IPruebaNegocio pruebaNegocio, ICategoriaNegocio categoriaNegocio, IParametroNegocio parametroNegocio) {
         initComponents();
         this.analisisNegocio = analisisNegocio;
+        this.pruebaNegocio = pruebaNegocio;
+        this.categoriaNegocio = categoriaNegocio;
+        this.parametroNegocio = parametroNegocio;
+    }
+
+    public JPanel getMainPanel() {
+        return MainPanel;
     }
 
     /**
@@ -77,6 +92,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         pruebasBTN.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 36)); // NOI18N
         pruebasBTN.setText("Pruebas");
         pruebasBTN.setToolTipText("");
+        pruebasBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pruebasBTNActionPerformed(evt);
+            }
+        });
 
         clientesBTN.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 36)); // NOI18N
         clientesBTN.setText("Clientes");
@@ -118,7 +138,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(clientesBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(pruebasBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(98, 98, 98)
                 .addComponent(analisisBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,12 +197,20 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         AnalisisPanel analisisPanel = new AnalisisPanel(analisisNegocio);
         MainPanel.setLayout(new BorderLayout());
         MainPanel.removeAll();
-        MainPanel.add(analisisPanel,BorderLayout.CENTER);
+        MainPanel.add(analisisPanel, BorderLayout.CENTER);
         MainPanel.revalidate();
         MainPanel.repaint();
     }//GEN-LAST:event_clientesBTNActionPerformed
 
-    
+    private void pruebasBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebasBTNActionPerformed
+        PruebaPanel pruebaPanel = new PruebaPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
+        MainPanel.setLayout(new BorderLayout());
+        MainPanel.removeAll();
+        MainPanel.add(pruebaPanel, BorderLayout.CENTER);
+        MainPanel.revalidate();
+        MainPanel.repaint();
+    }//GEN-LAST:event_pruebasBTNActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanel;

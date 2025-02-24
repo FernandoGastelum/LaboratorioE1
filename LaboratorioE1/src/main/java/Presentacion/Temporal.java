@@ -18,19 +18,29 @@ import Entidades.AnalisisLaboratorio;
 import Entidades.Resultado;
 import Negocio.AnalisisDetalleNegocio;
 import Negocio.AnalisisNegocio;
+import Negocio.CategoriaNegocio;
 import Negocio.IAnalisisDetalleNegocio;
 import Negocio.IAnalisisNegocio;
+import Negocio.ICategoriaNegocio;
+import Negocio.IParametroNegocio;
+import Negocio.IPruebaNegocio;
 import Negocio.NegocioException;
+import Negocio.ParametroNegocio;
+import Negocio.PruebaNegocio;
 import Persistencia.AnalisisDAO;
 import Persistencia.AnalisisDetalleDAO;
+import Persistencia.CategoriaDAO;
 import Persistencia.ClienteDAO;
 import Persistencia.ConexionBD;
 import Persistencia.IAnalisisDAO;
 import Persistencia.IAnalisisDetalleDAO;
+import Persistencia.ICategoriaDAO;
 import Persistencia.IClienteDAO;
 import Persistencia.IConexionBD;
+import Persistencia.IParametroDAO;
 import Persistencia.IPruebaDAO;
 import Persistencia.IResultadoDAO;
+import Persistencia.ParametroDAO;
 import Persistencia.PersistenciaException;
 import Persistencia.PruebaDAO;
 import Persistencia.ResultadoDAO;
@@ -206,7 +216,19 @@ public class Temporal {
         IPruebaDAO pruebaDAO = new PruebaDAO(conexion);
         IAnalisisDAO analisisDAO = new AnalisisDAO(conexion);
         IAnalisisNegocio analisisNegocio = new AnalisisNegocio(analisisDAO, clienteDAO, analisisDetalleDAO, pruebaDAO);
-        FrmMenuPrincipal frmPrincipal = new FrmMenuPrincipal(analisisNegocio);
+        
+        ICategoriaDAO categoriaDAO = new CategoriaDAO(conexion);
+        IParametroDAO parametroDAO = new ParametroDAO(conexion);
+        
+        IPruebaNegocio pruebaNegocio = new PruebaNegocio(pruebaDAO);
+        ICategoriaNegocio categoriaNegocio = new CategoriaNegocio(categoriaDAO);
+        IParametroNegocio parametroNegocio = new ParametroNegocio(parametroDAO);
+        
+        FrmMenuPrincipal frmPrincipal = new FrmMenuPrincipal(analisisNegocio, pruebaNegocio, categoriaNegocio, parametroNegocio);
         frmPrincipal.setVisible(true);
+        
+        //PruebaPanel pruebaPanel = new PruebaPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
+        //pruebaPanel.setVisible(true);
+        
     }
 }

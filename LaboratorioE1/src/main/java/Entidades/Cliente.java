@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Cliente {
     //atributos que conforman al cliente 
+
     private int id;
     private String nombre;
     private String apellidoPaterno;

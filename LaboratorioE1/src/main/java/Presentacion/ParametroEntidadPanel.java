@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import DTOS.ParametroDTO;
 import Negocio.ICategoriaNegocio;
 import Negocio.IParametroNegocio;
 import Negocio.IPruebaNegocio;
@@ -57,7 +58,7 @@ public class ParametroEntidadPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtNombrePrueba = new javax.swing.JTextField();
+        txtNombreParametro = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPruebas = new javax.swing.JTable();
@@ -68,10 +69,10 @@ public class ParametroEntidadPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 255, 255));
 
-        txtNombrePrueba.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 18)); // NOI18N
-        txtNombrePrueba.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreParametro.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 18)); // NOI18N
+        txtNombreParametro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombrePruebaActionPerformed(evt);
+                txtNombreParametroActionPerformed(evt);
             }
         });
 
@@ -138,7 +139,7 @@ public class ParametroEntidadPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombreParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1092, 1092, 1092))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,7 +157,7 @@ public class ParametroEntidadPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombrePrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -166,12 +167,13 @@ public class ParametroEntidadPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombrePruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombrePruebaActionPerformed
+    private void txtNombreParametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreParametroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombrePruebaActionPerformed
+    }//GEN-LAST:event_txtNombreParametroActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
+        //ParametroDTO parametro = new ParametroDTO(idPruebaLab, txtNombreParametro.getText());
+        //this.parametroNegocio.guardarParametro(idPruebaLab, parametro);
         
         abrirPruebaEntidad();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -189,6 +191,6 @@ public class ParametroEntidadPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPruebas;
-    private javax.swing.JTextField txtNombrePrueba;
+    private javax.swing.JTextField txtNombreParametro;
     // End of variables declaration//GEN-END:variables
 }

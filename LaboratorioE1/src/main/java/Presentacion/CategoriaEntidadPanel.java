@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import DTOS.CategoriaDTO;
 import Negocio.ICategoriaNegocio;
 import Negocio.IParametroNegocio;
 import Negocio.IPruebaNegocio;
@@ -56,7 +57,7 @@ public class CategoriaEntidadPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtNombrePrueba1 = new javax.swing.JTextField();
+        txtNombreCategoria = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -67,12 +68,7 @@ public class CategoriaEntidadPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 255, 255));
 
-        txtNombrePrueba1.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 18)); // NOI18N
-        txtNombrePrueba1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombrePrueba1ActionPerformed(evt);
-            }
-        });
+        txtNombreCategoria.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 18)); // NOI18N
 
         btnRegistrar.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 18)); // NOI18N
         btnRegistrar.setText("Registrar");
@@ -139,7 +135,7 @@ public class CategoriaEntidadPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombrePrueba1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -157,7 +153,7 @@ public class CategoriaEntidadPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombrePrueba1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -167,12 +163,9 @@ public class CategoriaEntidadPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNombrePrueba1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombrePrueba1ActionPerformed
-
-    }//GEN-LAST:event_txtNombrePrueba1ActionPerformed
-
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        
+        //CategoriaDTO categoria = new CategoriaDTO(idPruebaLab, txtNombreCategoria.getText());
+        //this.categoriaNegocio.guardarCategoria(idPruebaLab, categoria);
         
         abrirPruebaEntidad();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -190,6 +183,6 @@ public class CategoriaEntidadPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblPruebas1;
-    private javax.swing.JTextField txtNombrePrueba1;
+    private javax.swing.JTextField txtNombreCategoria;
     // End of variables declaration//GEN-END:variables
 }

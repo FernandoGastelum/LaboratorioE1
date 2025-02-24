@@ -226,7 +226,7 @@ public class PruebaDAO implements IPruebaDAO {
         }
     }
 
-    private PruebaLaboratorio obtenerPrueba(int id) throws PersistenciaException {
+    public PruebaLaboratorio obtenerPrueba(int id) throws PersistenciaException {
         try {
 
             String consultaSQL = """

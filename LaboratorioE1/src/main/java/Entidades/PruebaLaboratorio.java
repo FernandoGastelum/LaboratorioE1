@@ -23,6 +23,12 @@ public class PruebaLaboratorio {
         this.nombrePrueba = nombrePrueba;
     }
 
+    public PruebaLaboratorio(int id, String nombrePrueba, String categoria) {
+        this.id = id;
+        this.nombrePrueba = nombrePrueba;
+        this.categoria = categoria;
+    }
+    
     public int getId() {
         return id;
     }
@@ -55,6 +61,5 @@ public class PruebaLaboratorio {
     public String toString() {
         return "--- Prueba de Laboratorio ---\nID: " + id + "\nPrueba: " + nombrePrueba + "\nCategoria: " + categoria;
     }
-    
     
 }

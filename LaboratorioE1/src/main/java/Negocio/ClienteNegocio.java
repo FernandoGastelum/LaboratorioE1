@@ -7,12 +7,15 @@ package Negocio;
 import DTOS.ClientesDTO;
 import DTOS.ClientesTablaDTO;
 import DTOS.EditarClienteDTO;
+import DTOS.GuardarClienteDTO;
 import Entidades.Cliente;
 import Persistencia.IClienteDAO;
 import Persistencia.PersistenciaException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,11 +36,6 @@ public class ClienteNegocio implements IClienteNegocio {
     public ClienteNegocio(IClienteDAO clienteDAO) {
         this.clienteDAO = clienteDAO;
     }
-
-    public ClienteNegocio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     
     public ClientesDTO convertirAClientesDTO(Cliente cliente) {
         if (cliente == null) {
@@ -53,32 +51,42 @@ public class ClienteNegocio implements IClienteNegocio {
     //tabla para msql
     @Override
     public List<ClientesTablaDTO> buscarClientes() throws NegocioException {
-        // Se obtiene la lista de clientes desde la capa de persistencia.
-        List<Cliente> clientes = clienteDAO.buscarClientes();
-        List<ClientesTablaDTO> dtos = new ArrayList<>();
-         // Se convierten las entidades en DTOs para la presentación.
-         clientes.forEach((c) -> {
-             dtos.add(new ClientesTablaDTO(
-                     c.getId(),
-                     c.getNombre(),
-                     c.getApellidoPaterno(),
-                     c.getApellidoMaterno(),
-                     c.getFechaNacimiento(),
-                     c.getFechaRegistro()
-             ));
-         });
-        return dtos;
+         try {
+             // Se obtiene la lista de clientes desde la capa de persistencia.
+             List<Cliente> clientes = clienteDAO.buscarClientes();
+             List<ClientesTablaDTO> dtos = new ArrayList<>();
+             // Se convierten las entidades en DTOs para la presentación.
+             clientes.forEach((c) -> {
+                 dtos.add(new ClientesTablaDTO(
+                         c.getId(),
+                         c.getNombre(),
+                         c.getApellidoPaterno(),
+                         c.getApellidoMaterno(),
+                         c.getFechaNacimiento(),
+                         c.getFechaRegistro()
+                 ));
+             });
+             return dtos;
+         } catch (PersistenciaException ex) {
+             Logger.getLogger(ClienteNegocio.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
     
     public ClientesDTO guardar(GuardarClienteDTO cliente) throws NegocioException {
-        // Validación y aplicación de reglas de negocio.
-        validarInformacionGuardarCliente(cliente);
-        reglasDeNegocioGuardarCliente(cliente);
-        // Se guarda el cliente mediante el DAO.
-        Cliente clienteGuardado;
-         clienteGuardado = IClienteDAO.guardar;
-        // Se convierte la entidad guardada a DTO.
-        return convertirAClientesDTO(clienteGuardado);
+         try {
+             // Validación y aplicación de reglas de negocio.
+             validarInformacionGuardarCliente(cliente);
+             reglasDeNegocioGuardarCliente(cliente);
+             // Se guarda el cliente mediante el DAO.
+             Cliente clienteGuardado;
+             clienteGuardado = clienteDAO.guardar(cliente);
+             // Se convierte la entidad guardada a DTO.
+             return convertirAClientesDTO(clienteGuardado);
+         } catch (PersistenciaException ex) {
+             Logger.getLogger(ClienteNegocio.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 //    @Override
 //    public List<ClientesTablaDTO> buscarClientes() throws NegocioException {
@@ -114,31 +122,46 @@ public class ClienteNegocio implements IClienteNegocio {
     
     
       public ClientesDTO editar(EditarClienteDTO cliente) throws NegocioException {
-          // Validar la información a actualizar.
-          validarInformacionEditarCliente(cliente);
-          // Se actualiza el cliente mediante el DAO.
-          Cliente clienteEditado = clienteDAO.editar(cliente);
-          return convertirAClientesDTO(clienteEditado);
+         try {
+             // Validar la información a actualizar.
+             validarInformacionEditarCliente(cliente);
+             // Se actualiza el cliente mediante el DAO.
+             Cliente clienteEditado = clienteDAO.editar(cliente);
+             return convertirAClientesDTO(clienteEditado);
+         } catch (PersistenciaException ex) {
+             Logger.getLogger(ClienteNegocio.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
    @Override
     public ClientesDTO eliminar(int id) throws NegocioException {
-        // Validar que el ID del cliente sea correcto.
-        validarInformacionEliminarCliente(id);
-        // Se elimina el cliente mediante el DAO.
-        Cliente clienteEliminado = clienteDAO.eliminar(id);
-        return convertirAClientesDTO(clienteEliminado);
+         try {
+             // Validar que el ID del cliente sea correcto.
+             validarInformacionEliminarCliente(id);
+             // Se elimina el cliente mediante el DAO.
+             Cliente clienteEliminado = clienteDAO.eliminar(id);
+             return convertirAClientesDTO(clienteEliminado);
+         } catch (PersistenciaException ex) {
+             Logger.getLogger(ClienteNegocio.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
     
    @Override
     public ClientesDTO buscarPorId(int id) throws NegocioException {
-        // Validar el ID del cliente.
-        validarInformacionBuscarCliente(id);
-        Cliente clienteEncontrado = clienteDAO.buscarClientes(id);
-        if (clienteEncontrado == null) {
-            throw new NegocioException("Cliente no encontrado con id: " + id);
-        }
-        return convertirAClientesDTO(clienteEncontrado);
+         try {
+             // Validar el ID del cliente.
+             validarInformacionBuscarCliente(id);
+             Cliente clienteEncontrado = clienteDAO.buscarClientes(id);
+             if (clienteEncontrado == null) {
+                 throw new NegocioException("Cliente no encontrado con id: " + id);
+             }
+             return convertirAClientesDTO(clienteEncontrado);
+         } catch (PersistenciaException ex) {
+             Logger.getLogger(ClienteNegocio.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return null;
     }
 
     private void validaInformacionGuardarCliente(GuardarClienteDTO cliente) throws NegocioException {

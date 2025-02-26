@@ -1,62 +1,86 @@
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisDetalleTablaDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\PruebaDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\NegocioException.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\Temporal.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ConexionBD.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IAnalisisDetalleDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IUsuarioDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IResultadoDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Utilidades\JButtonCell.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\AnalisisDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ClientesDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\PruebaDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\UsuarioDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\AnalisisDetalleDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ResultadoDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\ParametroNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\AnalisisDetalle.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\ParametrosPrueba.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\PruebaLaboratorio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IConexionBD.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\AnalisisLaboratorio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\EditarResultadoDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IClienteNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\AnalisisDetalleNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Utilidades\JButtonCellEditor.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\ResultadoNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\PersistenciaException.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ParametroDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IParametroDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\EditarAnalisisDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\GuardarAnalisisDetalleDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IResultadoNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\GuardarAnalisisDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IAnalisisDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\Resultado.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IAnalisisNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\GuardarResultadoDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IClienteDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ParametroTablaDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\Usuario.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ParametroDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ClienteDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\UsuarioNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IAnalisisDetalleNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IPruebaDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisDetalleDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\AnalisisNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IUsuarioNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ClientesTablaDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ResultadoDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\PruebaNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\com\mycompany\laboratorioe1\LaboratorioE1.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\EditarAnalisisDetalleDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Utilidades\JButtonRenderer.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\Cliente.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\PruebaTablaDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\ClienteNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisTablaDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IPruebaNegocio.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisDTO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\UsuarioDAO.java
-C:\Users\gaspa\Documents\ITSONN\quinto\BDA\Coding Type shit\Biblioteca 2.0\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IParametroNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\ParametroNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IUsuarioNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\EditarAnalisisDetalleDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\UsuarioDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ParametroTablaDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\AnalisisRegistroPanel.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\PruebaDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\ResultadoNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\ResultadoParametroAnalisis.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IAnalisisDetalleNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\EditarClienteDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ConexionBD.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IResultadoNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ParametroDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\ParametrosPrueba.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\FrmMenuPrincipal.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\PruebaPanel.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\EditarAnalisisDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IConexionBD.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\Cliente.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\AnalisisDetalleNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IPruebaNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\PersistenciaException.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ResultadoTablaDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Utilidades\JButtonCell.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IClienteDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisDetalleDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisTablaDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IParametroNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\ListadoClientesPanel.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\PruebaLaboratorio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\ResultadosCapturaPanel.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Utilidades\PanelManager.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Utilidades\JButtonCellEditor.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\CategoriaTablaDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Utilidades\JButtonRenderer.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\ClienteNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\PruebaNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\UsuarioNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\PruebaTablaDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IAnalisisDetalleDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\PruebaDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\ICategoriaNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\GuardarClienteDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\ParametroEntidadPanel.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\AnalisisPanel.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ICategoriaDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\Temporal.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\AnalisisLaboratorio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\AnalisisNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ResultadoDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IParametroDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ResultadoParametroAnalisisTablaDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\NegocioException.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IPruebaDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\RegistrarClientePanel.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ClientesTablaDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\UsuarioDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\PruebaEntidadPanel.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IResultadoDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ParametroDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\ClienteDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\CategoriaDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\CategoriaEntidadPanel.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\AnalisisDetalleTablaDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IUsuarioDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\CategoriaPrueba.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\AnalisisDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\CategoriaDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\EditarResultadoDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\IniciaSesion.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\GuardarResultadoDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\AnalisisDetalleDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\CategoriaNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\GuardarAnalisisDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\AnalisisDetalle.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ClientesDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\GuardarAnalisisDetalleDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IAnalisisNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Persistencia\IAnalisisDAO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\Resultado.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Negocio\IClienteNegocio.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\DTOS\ResultadoDTO.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Entidades\Usuario.java
+C:\Users\gaspa\Desktop\LaboratorioE1 JALANDO AL100\LaboratorioE1\LaboratorioE1\src\main\java\Presentacion\ResultadosPanel.java

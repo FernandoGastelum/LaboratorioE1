@@ -7,6 +7,7 @@ package Persistencia;
 import DTOS.EditarResultadoDTO;
 import DTOS.GuardarResultadoDTO;
 import Entidades.Resultado;
+import Entidades.ResultadoParametroAnalisis;
 import java.util.List;
 
 /**
@@ -26,4 +27,13 @@ public interface IResultadoDAO {
     Resultado obtenerPorID(int id) throws PersistenciaException;
     
     List<Resultado> listarResultado() throws PersistenciaException;
+    
+    boolean existenResultadosParaAnalisis(int idAnalisis) throws PersistenciaException;
+        
+    int obtenerIdParametroPorAnalisisDetalle(int idAnalisisDetalle) throws PersistenciaException;
+    List<Integer> obtenerAnalisisDetallePorIdAnalisis(int idAnalisis) throws PersistenciaException;
+    List<ResultadoParametroAnalisis> obtenerParametrosYResultadosPorAnalisis(int idAnalisis) throws PersistenciaException;
+    int obtenerIdAnalisisDetalle(int idAnalisis, int idParametro) throws PersistenciaException;
+
+
 }

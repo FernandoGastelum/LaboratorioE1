@@ -17,20 +17,38 @@ import DTOS.ResultadoDTO;
 import Entidades.AnalisisLaboratorio;
 import Entidades.Resultado;
 import Negocio.AnalisisDetalleNegocio;
-import Negocio.AnalisisNegocio;
+import Negocio.AnalisisNegocio;import Negocio.CategoriaNegocio;
 import Negocio.IAnalisisDetalleNegocio;
 import Negocio.IAnalisisNegocio;
+import Negocio.ICategoriaNegocio;
+import Negocio.IParametroNegocio;
+import Negocio.IPruebaNegocio;
 import Negocio.NegocioException;
+import Negocio.ParametroNegocio;import Negocio.ClienteNegocio;
+import Negocio.IAnalisisDetalleNegocio;
+import Negocio.IAnalisisNegocio;
+import Negocio.IClienteNegocio;
+import Negocio.IPruebaNegocio;
+import Negocio.IResultadoNegocio;
+import Negocio.NegocioException;
+import Negocio.PruebaNegocio;
+import Negocio.ResultadoNegocio;
 import Persistencia.AnalisisDAO;
 import Persistencia.AnalisisDetalleDAO;
+import Persistencia.CategoriaDAO;
 import Persistencia.ClienteDAO;
 import Persistencia.ConexionBD;
 import Persistencia.IAnalisisDAO;
 import Persistencia.IAnalisisDetalleDAO;
+import Persistencia.ICategoriaDAO;
 import Persistencia.IClienteDAO;
 import Persistencia.IConexionBD;
+import Persistencia.IParametroDAO;
+import Persistencia.IPruebaDAO;
 import Persistencia.IResultadoDAO;
+import Persistencia.ParametroDAO;
 import Persistencia.PersistenciaException;
+import Persistencia.PruebaDAO;
 import Persistencia.ResultadoDAO;
 import java.sql.Connection;
 import java.util.Date;
@@ -48,7 +66,6 @@ public class Temporal {
             GuardarAnalisisDTO guardar = new GuardarAnalisisDTO(2, new Date());
             AnalisisLaboratorio analisisBD = analisisDAO.Guardar(guardar);
             System.out.println(analisisBD);
-          
         } catch (PersistenciaException e) {
             System.out.println(e.getMessage());
         }
@@ -75,16 +92,16 @@ public class Temporal {
         }
     }
     public void ConsultarAnalisisLaboratorioID(){
-        try {
-            IConexionBD conexion = new ConexionBD();
-            IAnalisisDAO analisisDAO = new AnalisisDAO(conexion);
-            IClienteDAO clienteDAO = new ClienteDAO(conexion);
-            IAnalisisNegocio analisisNegocio = new AnalisisNegocio(analisisDAO, clienteDAO);
-            AnalisisDTO analisisBD = analisisNegocio.obtenerAnalisisPorId(1);
-            System.out.println(analisisBD);
-        } catch (NegocioException e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            IConexionBD conexion = new ConexionBD();
+//            IAnalisisDAO analisisDAO = new AnalisisDAO(conexion);
+//            IClienteDAO clienteDAO = new ClienteDAO(conexion);
+//            IAnalisisNegocio analisisNegocio = new AnalisisNegocio(analisisDAO, clienteDAO);
+//            AnalisisDTO analisisBD = analisisNegocio.obtenerAnalisisPorId(1);
+//            System.out.println(analisisBD);
+//        } catch (NegocioException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
     public void EliminarAnalisisLaboratorio(){
         try {
@@ -153,17 +170,17 @@ public class Temporal {
             System.out.println(e.getMessage());
         }
     }
-    public void guardarResultado() {
-        try {
-            IConexionBD conexion = new ConexionBD();
-            IResultadoDAO resultadoDAO = new ResultadoDAO(conexion);
-            GuardarResultadoDTO guardar = new GuardarResultadoDTO(3, 9, "NewGuard", new Date());
-            Resultado resultadoBD = resultadoDAO.guardar(guardar);
-            System.out.println(resultadoBD);
-        } catch (PersistenciaException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public void guardarResultado() {
+//        try {
+//            IConexionBD conexion = new ConexionBD();
+//            IResultadoDAO resultadoDAO = new ResultadoDAO(conexion);
+//            GuardarResultadoDTO guardar = new GuardarResultadoDTO(9, "NewGuard", new Date());
+//            Resultado resultadoBD = resultadoDAO.guardar(guardar);
+//            System.out.println(resultadoBD);
+//        } catch (PersistenciaException e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     public void actualizarResultado() {
         try {
@@ -199,7 +216,27 @@ public class Temporal {
     }
     public static void main(String[] args) {
         Temporal temp = new Temporal();
-        temp.eliminarResultado();
+        IConexionBD conexion = new ConexionBD();
+        IClienteDAO clienteDAO = new ClienteDAO(conexion);
+        IAnalisisDetalleDAO analisisDetalleDAO = new AnalisisDetalleDAO(conexion);
+        IPruebaDAO pruebaDAO = new PruebaDAO(conexion);
+        IPruebaNegocio pruebaNegocio = new PruebaNegocio(pruebaDAO);
+        IAnalisisDAO analisisDAO = new AnalisisDAO(conexion);
+        ICategoriaDAO categoriaDAO = new CategoriaDAO(conexion);
+        IParametroDAO parametroDAO = new ParametroDAO(conexion);
+        ICategoriaNegocio categoriaNegocio = new CategoriaNegocio(categoriaDAO);
+        IParametroNegocio parametroNegocio = new ParametroNegocio(parametroDAO);
+        IResultadoDAO resultadoDAO = new ResultadoDAO(conexion);
+        IAnalisisNegocio analisisNegocio = new AnalisisNegocio(analisisDAO, clienteDAO, analisisDetalleDAO, pruebaDAO, resultadoDAO);
+        IResultadoNegocio resultadoNegocio = new ResultadoNegocio(resultadoDAO, analisisDetalleDAO, parametroDAO);
+        IClienteNegocio clienteNegocio = new ClienteNegocio(clienteDAO);
+        IAnalisisDetalleNegocio analisisDetalleNegocio = new AnalisisDetalleNegocio(analisisDetalleDAO);
+        FrmMenuPrincipal frmPrincipal = new FrmMenuPrincipal(analisisNegocio, pruebaNegocio, categoriaNegocio, parametroNegocio, resultadoNegocio,clienteNegocio,analisisDetalleNegocio);
+        
+        frmPrincipal.setVisible(true);
+        
+        //PruebaPanel pruebaPanel = new PruebaPanel(pruebaNegocio, categoriaNegocio, parametroNegocio);
+        //pruebaPanel.setVisible(true);
+        
     }
-   
 }

@@ -14,18 +14,19 @@ import java.util.List;
  * @author Ilian Fernando Gastelum Romo 228761,pau
  */
 public interface IClienteDAO {
-    public String obtenerNombrePorId(int idCliente);
+    String obtenerNombrePorId(int idCliente);
 
-    public List<Cliente> buscarClientes();
+    List<Cliente> buscarClientes()throws PersistenciaException;
 
-    public Cliente editar(EditarClienteDTO cliente);
+    Cliente editar(EditarClienteDTO cliente)throws PersistenciaException;
 
-    public Cliente eliminar(int id);
+    Cliente eliminar(int id)throws PersistenciaException;
 
-    public Cliente guardar(GuardarClienteDTO cliente);
+    Cliente guardar(GuardarClienteDTO cliente) throws PersistenciaException;
 
-    public Cliente buscarClientes(int id);
+    Cliente buscarClientes(int id)throws PersistenciaException;
 
+    Cliente ObtenerPorID(int id) throws PersistenciaException;
 
  
 }

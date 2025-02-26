@@ -32,6 +32,12 @@ public class Cliente {
         this.fechaRegistro = fechaRegistro;
         this.fechaNacimiento = fechaNacimiento;
     }
+    public Cliente(int id, String nombre, Date fechaRegistro, Date fechaNacimiento) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
     public int getId() {
         return id;

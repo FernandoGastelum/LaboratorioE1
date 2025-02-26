@@ -39,13 +39,15 @@ public class ResultadosPanel extends javax.swing.JPanel {
     private final PanelManager panel;
     private final IResultadoNegocio resultadoNegocio;
     private final IParametroNegocio parametroNegocio;
-    public ResultadosPanel(PanelManager panel,IAnalisisNegocio analisisNegocio, IResultadoNegocio resultadoNegocio,IParametroNegocio parametroNegocio) {
+    private final IPruebaNegocio pruebaNegocio;
+    public ResultadosPanel(PanelManager panel,IAnalisisNegocio analisisNegocio, IResultadoNegocio resultadoNegocio,IParametroNegocio parametroNegocio,IPruebaNegocio pruebaNegocio) {
         initComponents();
         this.panel=panel;
         this.analisisNegocio = analisisNegocio;
         this.resultadoNegocio = resultadoNegocio;
         this.parametroNegocio=parametroNegocio;
         this.metodosIniciales();
+        this.pruebaNegocio = pruebaNegocio;
     }
     private void metodosIniciales(){
         this.limpiarTabla();
@@ -91,6 +93,11 @@ public class ResultadosPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Selecciona un análisis para editar", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        int idPrueba = this.getIdPruebaSeleccionadoTabla();
+        if (idPrueba == 0) {
+            JOptionPane.showMessageDialog(this, "Selecciona un análisis para editar", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         // Obtener la lista de parámetros asociados al análisis seleccionado
         List<ParametroDTO> parametros = buscaridParametros(idAnalisis);
@@ -99,7 +106,9 @@ public class ResultadosPanel extends javax.swing.JPanel {
         List<ResultadoParametroAnalisisTablaDTO> resultados = resultadoNegocio.obtenerParametrosYResultadosPorAnalisis(idAnalisis);
 
         // Crear el panel de captura de resultados y pasarle los datos
-        ResultadosCapturaPanel panelCapturaResultados = new ResultadosCapturaPanel(panel, analisisNegocio, idAnalisis, resultadoNegocio, parametros, resultados,parametroNegocio);
+        ResultadosCapturaPanel panelCapturaResultados = new ResultadosCapturaPanel(
+                panel, analisisNegocio, idAnalisis, resultadoNegocio, parametros, 
+                resultados,parametroNegocio,idPrueba,pruebaNegocio);
 
         // Cambiar al nuevo panel
         panel.cambiarPanel(panelCapturaResultados);
@@ -116,7 +125,7 @@ public class ResultadosPanel extends javax.swing.JPanel {
         );
         if (opcion == JOptionPane.YES_OPTION) {
             try {
-                this.analisisNegocio.Eliminar(id);
+                this.resultadoNegocio.eliminar(id);
             } catch (NegocioException ex) {
                 System.out.println(ex.getMessage());
             }
@@ -135,6 +144,29 @@ public class ResultadosPanel extends javax.swing.JPanel {
         } else {
             return 0;
         }
+    }
+    private int getIdPruebaSeleccionadoTabla() {
+        int indiceFilaSeleccionada = this.TablaAnalisis.getSelectedRow();
+        if (indiceFilaSeleccionada != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) this.TablaAnalisis.getModel();
+            int indiceColumnaId = 2;
+            String nombrePrueba = (String) modelo.getValueAt(indiceFilaSeleccionada,
+                    indiceColumnaId);
+            System.out.println(nombrePrueba);
+            
+            return this.buscarIdPruebaPorNombre(nombrePrueba);
+        } else {
+            return 0;
+        }
+    }
+    private int buscarIdPruebaPorNombre(String prueba){
+        try {
+            PruebaDTO pruebaDTO = pruebaNegocio.obtenerPruebaPorNombre(prueba);
+            return pruebaDTO.getId();
+        } catch (NegocioException ex) {
+            Logger.getLogger(ResultadosPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
     private void buscarAnalisisParaTabla(int id) {
         try {

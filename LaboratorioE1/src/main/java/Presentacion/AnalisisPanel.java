@@ -5,6 +5,7 @@
 package Presentacion;
 
 import DTOS.AnalisisTablaDTO;
+import Negocio.IAnalisisDetalleNegocio;
 import Negocio.IAnalisisNegocio;
 import Negocio.IClienteNegocio;
 import Negocio.IPruebaNegocio;
@@ -29,16 +30,18 @@ public class AnalisisPanel extends javax.swing.JPanel {
     /**
      * Creates new form AnalisisPanel
      */
+    private IAnalisisDetalleNegocio analisisDetalleNegocio;
     private IClienteNegocio clienteNegocio;
     private IPruebaNegocio pruebaNegocio;
     private IAnalisisNegocio analisisNegocio;
     private PanelManager panel;
-    public AnalisisPanel(IAnalisisNegocio analisisNegocio, PanelManager panel,IClienteNegocio clienteNegocio, IPruebaNegocio pruebaNegocio) {
+    public AnalisisPanel(IAnalisisNegocio analisisNegocio, PanelManager panel,IClienteNegocio clienteNegocio, IPruebaNegocio pruebaNegocio,IAnalisisDetalleNegocio analisisDetalleNegocio) {
         initComponents();
         this.analisisNegocio = analisisNegocio;
         this.panel=panel;
         this.clienteNegocio = clienteNegocio;
         this.pruebaNegocio = pruebaNegocio;
+        this.analisisDetalleNegocio=analisisDetalleNegocio;
         this.metodosIniciales();
         
     }
@@ -240,7 +243,7 @@ public class AnalisisPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_buscarBTNActionPerformed
 
     private void nuevoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoBTNActionPerformed
-        AnalisisRegistroPanel analisisRegistro = new AnalisisRegistroPanel(clienteNegocio, pruebaNegocio, analisisNegocio, panel);
+        AnalisisRegistroPanel analisisRegistro = new AnalisisRegistroPanel(clienteNegocio, pruebaNegocio, analisisNegocio, panel,analisisDetalleNegocio);
         panel.cambiarPanel(analisisRegistro);
     }//GEN-LAST:event_nuevoBTNActionPerformed
 

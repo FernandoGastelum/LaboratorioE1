@@ -28,5 +28,7 @@ public interface IResultadoNegocio {
     int obtenerIdParametroPorAnalisisDetalle(int idAnalisisDetalle) throws NegocioException;
     List<Integer> obtenerAnalisisDetallePorIdAnalisis(int idAnalisis) throws NegocioException;
     List<ResultadoParametroAnalisisTablaDTO> obtenerParametrosYResultadosPorAnalisis(int idAnalisis) throws NegocioException;
+    int obtenerIdAnalisisDetalle(int idAnalisis, int idParametro) throws NegocioException;
+
 
 }

@@ -4,6 +4,7 @@
  */
 package Presentacion;
 
+import Negocio.IAnalisisDetalleNegocio;
 import Negocio.IAnalisisNegocio;
 import Negocio.ICategoriaNegocio;
 import Negocio.IParametroNegocio;
@@ -29,13 +30,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private IClienteNegocio clienteNegocio;
     private IPruebaNegocio pruebaNegocio;
     private IAnalisisNegocio analisisNegocio;
+    private IAnalisisDetalleNegocio analisisDetalleNegocio;
     private ICategoriaNegocio categoriaNegocio;
     private IParametroNegocio parametroNegocio;
     private IResultadoNegocio resultadoNegocio;
     private PanelManager panel;
     public FrmMenuPrincipal(IAnalisisNegocio analisisNegocio, IPruebaNegocio pruebaNegocio, 
             ICategoriaNegocio categoriaNegocio, IParametroNegocio parametroNegocio,
-            IResultadoNegocio resultadoNegocio,IClienteNegocio clienteNegocio) {
+            IResultadoNegocio resultadoNegocio,IClienteNegocio clienteNegocio, IAnalisisDetalleNegocio analisisDetalleNegocio) {
     
         initComponents();
         this.panel = new PanelManager(MainPanel);
@@ -44,6 +46,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         this.categoriaNegocio = categoriaNegocio;
         this.parametroNegocio = parametroNegocio;
         this.resultadoNegocio = resultadoNegocio;
+        this.analisisDetalleNegocio=analisisDetalleNegocio;
         this.clienteNegocio = clienteNegocio;
     }
 
@@ -216,7 +219,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clientesBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesBTNActionPerformed
-        
+        ListadoClientesPanel listadoClientesPanel = new ListadoClientesPanel(clienteNegocio, panel);
+        panel.cambiarPanel(listadoClientesPanel);
     }//GEN-LAST:event_clientesBTNActionPerformed
 
     private void pruebasBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebasBTNActionPerformed
@@ -233,12 +237,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                                             
 
     private void analisisBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analisisBTNActionPerformed
-        AnalisisPanel analisisPanel = new AnalisisPanel(analisisNegocio, panel, clienteNegocio, pruebaNegocio);
+        AnalisisPanel analisisPanel = new AnalisisPanel(analisisNegocio, panel, clienteNegocio, pruebaNegocio,analisisDetalleNegocio);
         panel.cambiarPanel(analisisPanel);
     }//GEN-LAST:event_analisisBTNActionPerformed
 
     private void resultadosBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultadosBTNActionPerformed
-        ResultadosPanel resultadosPanel = new ResultadosPanel(panel, analisisNegocio, resultadoNegocio,parametroNegocio);
+        ResultadosPanel resultadosPanel = new ResultadosPanel(panel, analisisNegocio, resultadoNegocio,parametroNegocio,pruebaNegocio);
         panel.cambiarPanel(resultadosPanel);
     }//GEN-LAST:event_resultadosBTNActionPerformed
 

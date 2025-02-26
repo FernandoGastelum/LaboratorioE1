@@ -196,4 +196,12 @@ public class ResultadoNegocio implements IResultadoNegocio{
         }
         
     }
+    @Override
+    public int obtenerIdAnalisisDetalle(int idAnalisis, int idParametro) throws NegocioException {
+        try {
+            return resultadoDAO.obtenerIdAnalisisDetalle(idAnalisis, idParametro);
+        } catch (PersistenciaException e) {
+            throw new NegocioException("Error al obtener idAnalisisDetalle");
+        }
+    }
 }

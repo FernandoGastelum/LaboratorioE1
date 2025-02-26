@@ -19,8 +19,9 @@ public class Resultado {
 
     public Resultado() {}
 
-    public Resultado(int id, int idParametro, String valor, Date fechaRegistro) {
+    public Resultado(int id, int idAnalisisDetalle,int idParametro, String valor, Date fechaRegistro) {
         this.id = id;
+        this.idAnalisisDetalle=idAnalisisDetalle;
         this.idParametro = idParametro;
         this.valor = valor;
         this.fechaRegistro=fechaRegistro;

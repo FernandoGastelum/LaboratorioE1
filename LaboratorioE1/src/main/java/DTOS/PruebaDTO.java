@@ -12,7 +12,7 @@ import java.util.List;
  * @author Ángel Ruíz García - 00000248171
  */
 public class PruebaDTO {
-
+    private int id;
     private String nombrePrueba;
     private String categoria;
     private List<String> parametros;
@@ -28,6 +28,19 @@ public class PruebaDTO {
         this.nombrePrueba = nombrePrueba;
         this.categoria = categoria;
         this.parametros = parametros;
+    }
+
+    public PruebaDTO(int id, String nombrePrueba) {
+        this.id = id;
+        this.nombrePrueba = nombrePrueba;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombrePrueba() {

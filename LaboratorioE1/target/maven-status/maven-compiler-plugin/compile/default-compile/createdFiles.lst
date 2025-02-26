@@ -2,6 +2,7 @@ Persistencia\AnalisisDetalleDAO.class
 Presentacion\CategoriaEntidadPanel$3.class
 DTOS\PruebaDTO.class
 Presentacion\CategoriaEntidadPanel.class
+Presentacion\IniciaSesion.class
 DTOS\UsuarioDTO.class
 Utilidades\JButtonCellEditor.class
 Presentacion\PruebaPanel$2.class
@@ -14,12 +15,16 @@ Negocio\PruebaNegocio.class
 Presentacion\PruebaPanel$5.class
 DTOS\CategoriaTablaDTO.class
 Persistencia\IUsuarioDAO.class
+Presentacion\AnalisisRegistroPanel$4.class
 Presentacion\FrmMenuPrincipal$3.class
 Negocio\NegocioException.class
+Presentacion\RegistrarClientePanel$2.class
 Persistencia\AnalisisDAO.class
+Presentacion\ListadoClientesPanel$2.class
 Presentacion\PruebaEntidadPanel$4.class
 Presentacion\AnalisisRegistroPanel$1.class
 Entidades\Resultado.class
+Presentacion\RegistrarClientePanel$4.class
 Presentacion\ParametroEntidadPanel$2.class
 DTOS\GuardarResultadoDTO.class
 Persistencia\IConexionBD.class
@@ -33,14 +38,15 @@ DTOS\AnalisisDetalleDTO.class
 DTOS\GuardarAnalisisDetalleDTO.class
 Negocio\IUsuarioNegocio.class
 Persistencia\IAnalisisDetalleDAO.class
+Presentacion\RegistrarClientePanel$1.class
 Utilidades\PanelManager.class
 Entidades\Usuario.class
 Persistencia\PersistenciaException.class
 Presentacion\AnalisisRegistroPanel$2.class
 Entidades\ParametrosPrueba.class
-com\mycompany\laboratorioe1\LaboratorioE1.class
 Negocio\CategoriaNegocio.class
 Presentacion\CategoriaEntidadPanel$1.class
+Presentacion\RegistrarClientePanel$5.class
 Entidades\ResultadoParametroAnalisis.class
 DTOS\ClientesTablaDTO.class
 Presentacion\ParametroEntidadPanel$4.class
@@ -48,6 +54,7 @@ Presentacion\Temporal.class
 Presentacion\PruebaEntidadPanel$1.class
 Presentacion\ResultadosPanel.class
 Presentacion\AnalisisPanel$4.class
+Presentacion\AnalisisRegistroPanel$3.class
 DTOS\EditarAnalisisDetalleDTO.class
 Persistencia\PruebaDAO.class
 Persistencia\ResultadoDAO.class
@@ -59,6 +66,7 @@ Presentacion\FrmMenuPrincipal$4.class
 Negocio\ResultadoNegocio.class
 Presentacion\AnalisisRegistroPanel.class
 DTOS\ClientesDTO.class
+Presentacion\ListadoClientesPanel$3.class
 Entidades\AnalisisDetalle.class
 Presentacion\ParametroEntidadPanel$3.class
 Presentacion\AnalisisPanel.class
@@ -71,6 +79,7 @@ Utilidades\JButtonCell.class
 DTOS\EditarResultadoDTO.class
 Persistencia\ConexionBD.class
 Persistencia\IPruebaDAO.class
+DTOS\GuardarClienteDTO.class
 Persistencia\IAnalisisDAO.class
 Negocio\IAnalisisNegocio.class
 Presentacion\PruebaPanel$1.class
@@ -78,6 +87,7 @@ Presentacion\ResultadosPanel$3.class
 DTOS\PruebaTablaDTO.class
 DTOS\EditarAnalisisDTO.class
 Negocio\ICategoriaNegocio.class
+Presentacion\IniciaSesion$1.class
 Negocio\IClienteNegocio.class
 DTOS\ResultadoDTO.class
 Persistencia\IResultadoDAO.class
@@ -86,6 +96,10 @@ Presentacion\PruebaPanel$4.class
 Persistencia\IParametroDAO.class
 Negocio\ClienteNegocio.class
 Negocio\IPruebaNegocio.class
+DTOS\EditarClienteDTO.class
+Presentacion\RegistrarClientePanel.class
+Presentacion\ListadoClientesPanel.class
+Presentacion\IniciaSesion$2.class
 Presentacion\FrmMenuPrincipal$2.class
 Presentacion\ParametroEntidadPanel$1.class
 Presentacion\ResultadosPanel$1.class
@@ -109,6 +123,8 @@ Presentacion\ResultadosCapturaPanel.class
 Negocio\AnalisisNegocio.class
 Negocio\IAnalisisDetalleNegocio.class
 DTOS\AnalisisDTO.class
+Presentacion\RegistrarClientePanel$3.class
 Presentacion\ResultadosPanel$2.class
 Entidades\PruebaLaboratorio.class
 Presentacion\PruebaEntidadPanel$5.class
+Presentacion\ListadoClientesPanel$1.class

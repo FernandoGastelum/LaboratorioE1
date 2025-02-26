@@ -299,7 +299,7 @@ public class PruebaDAO implements IPruebaDAO {
     public PruebaLaboratorio obtenerPruebaPorNombre(String prueba) throws PersistenciaException {
         String consulta = """
                                  SELECT 
-                                    id
+                                    id, nombrePrueba
                                  FROM PruebasLaboratorio WHERE nombrePrueba = ?;
                                  """;
         try (Connection conexion = conexionBD.crearConexion();

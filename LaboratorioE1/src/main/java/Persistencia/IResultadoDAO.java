@@ -33,5 +33,7 @@ public interface IResultadoDAO {
     int obtenerIdParametroPorAnalisisDetalle(int idAnalisisDetalle) throws PersistenciaException;
     List<Integer> obtenerAnalisisDetallePorIdAnalisis(int idAnalisis) throws PersistenciaException;
     List<ResultadoParametroAnalisis> obtenerParametrosYResultadosPorAnalisis(int idAnalisis) throws PersistenciaException;
+    int obtenerIdAnalisisDetalle(int idAnalisis, int idParametro) throws PersistenciaException;
+
 
 }

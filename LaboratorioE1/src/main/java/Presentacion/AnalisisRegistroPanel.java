@@ -7,10 +7,12 @@ package Presentacion;
 import DTOS.AnalisisDTO;
 import DTOS.ClientesTablaDTO;
 import DTOS.GuardarAnalisisDTO;
+import DTOS.GuardarAnalisisDetalleDTO;
 import DTOS.PruebaTablaDTO;
 import Entidades.AnalisisLaboratorio;
 import Entidades.Cliente;
 import Entidades.PruebaLaboratorio;
+import Negocio.IAnalisisDetalleNegocio;
 import Negocio.IAnalisisNegocio;
 import Negocio.IClienteNegocio;
 import Negocio.IPruebaNegocio;
@@ -34,17 +36,19 @@ public class AnalisisRegistroPanel extends javax.swing.JPanel {
      * Creates new form AnalisisRegistroPanel
      */
     private IAnalisisNegocio analisisNegocio;
+    private IAnalisisDetalleNegocio analisisDetalleNegocio;
     private IClienteNegocio clienteNegocio;
     private IPruebaNegocio pruebaNegocio;
     private PanelManager panel;
     private List<Integer> pruebasSeleccionadas;
-    public AnalisisRegistroPanel(IClienteNegocio clienteNegocio, IPruebaNegocio pruebaNegocio, IAnalisisNegocio analisisNegocio, PanelManager panel) {
+    public AnalisisRegistroPanel(IClienteNegocio clienteNegocio, IPruebaNegocio pruebaNegocio, IAnalisisNegocio analisisNegocio, PanelManager panel,IAnalisisDetalleNegocio analisisDetalleNegocio) {
         initComponents();
         this.clienteNegocio = clienteNegocio;
         this.pruebaNegocio = pruebaNegocio;
         this.analisisNegocio = analisisNegocio;
         this.pruebasSeleccionadas = new ArrayList<>();
         this.panel = panel;
+        this.analisisDetalleNegocio=analisisDetalleNegocio;
         this.metodosIniciales();
     }
     private void metodosIniciales(){
@@ -53,7 +57,7 @@ public class AnalisisRegistroPanel extends javax.swing.JPanel {
     }
     private void cargarClientes() {
         try {
-            List<ClientesTablaDTO> clientes = clienteNegocio.obtenerTodosLosClientes();
+            List<ClientesTablaDTO> clientes = clienteNegocio.buscarClientes();
             this.agregarRegistrosClientesTabla(clientes);
         } catch (NegocioException ex) {
             Logger.getLogger(AnalisisRegistroPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,9 +69,12 @@ public class AnalisisRegistroPanel extends javax.swing.JPanel {
         }
         DefaultTableModel modeloTabla = (DefaultTableModel) this.TableClientes.getModel();
         clientesLista.forEach(row -> {
-            Object[] fila = new Object[3];
-            
-
+            Object[] fila = new Object[5];
+            fila[0] = row.getId();
+            fila[1] = row.getNombre();
+            fila[2] = row.getApellidoPaterno();
+            fila[3] = row.getApellidoMaterno();
+            fila[4] = row.getFechaNacimiento();
             modeloTabla.addRow(fila);
         });
     }
@@ -97,13 +104,20 @@ public class AnalisisRegistroPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Seleccione un cliente y al menos una prueba.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         int idCliente = (int) TableClientes.getValueAt(filaSeleccionada, 0);
         GuardarAnalisisDTO nuevoAnalisis = new GuardarAnalisisDTO(idCliente, new Date());
         AnalisisDTO analisis = analisisNegocio.Guardar(nuevoAnalisis);
-        
+
         if (analisis != null) {
-            JOptionPane.showMessageDialog(this, "Análisis registrado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            int idAnalisis = analisis.getIdAnalisis(); // Obtener el ID del análisis registrado
+
+            for (Integer idPrueba : pruebasSeleccionadas) {
+                GuardarAnalisisDetalleDTO detalle = new GuardarAnalisisDetalleDTO(idAnalisis, idPrueba);
+                analisisDetalleNegocio.guardar(detalle); // Guardar cada prueba en AnalisisDetalle
+            }
+
+            JOptionPane.showMessageDialog(this, "Análisis y detalles registrados con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Error al registrar el análisis.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -143,7 +157,7 @@ public class AnalisisRegistroPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha de Nacimiento"
+                "ID", "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha de Nacimiento"
             }
         ));
         jScrollPane1.setViewportView(TableClientes);
@@ -165,6 +179,11 @@ public class AnalisisRegistroPanel extends javax.swing.JPanel {
 
         agregarPruebaBTN.setBackground(new java.awt.Color(0, 204, 255));
         agregarPruebaBTN.setText("+ Agregar prueba");
+        agregarPruebaBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarPruebaBTNActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("*agregue al menos una prueba");
 
@@ -177,6 +196,11 @@ public class AnalisisRegistroPanel extends javax.swing.JPanel {
 
         registrarBTN.setBackground(new java.awt.Color(33, 161, 46));
         registrarBTN.setText("Registrar");
+        registrarBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarBTNActionPerformed(evt);
+            }
+        });
 
         cancelarBTN.setBackground(new java.awt.Color(255, 204, 0));
         cancelarBTN.setText("Cancelar");
@@ -288,9 +312,21 @@ public class AnalisisRegistroPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_buscarBTNActionPerformed
 
     private void cancelarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBTNActionPerformed
-        AnalisisPanel analisisPanel = new AnalisisPanel(analisisNegocio, panel, clienteNegocio, pruebaNegocio);
+        AnalisisPanel analisisPanel = new AnalisisPanel(analisisNegocio, panel, clienteNegocio, pruebaNegocio,analisisDetalleNegocio);
         panel.cambiarPanel(analisisPanel);
     }//GEN-LAST:event_cancelarBTNActionPerformed
+
+    private void agregarPruebaBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPruebaBTNActionPerformed
+        this.agregarPrueba();
+    }//GEN-LAST:event_agregarPruebaBTNActionPerformed
+
+    private void registrarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarBTNActionPerformed
+        try {
+            this.registrarAnalisis();
+        } catch (NegocioException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+    }//GEN-LAST:event_registrarBTNActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

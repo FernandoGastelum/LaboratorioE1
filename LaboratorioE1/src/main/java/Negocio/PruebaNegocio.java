@@ -30,7 +30,7 @@ public class PruebaNegocio implements IPruebaNegocio {
             return null;
         }
 
-        return new PruebaDTO(prueba.getNombrePrueba());
+        return new PruebaDTO(prueba.getId(),prueba.getNombrePrueba());
     }
 
     @Override

@@ -47,6 +47,7 @@ public class ResultadoDAO implements IResultadoDAO{
             while (rs.next()) {
                 resultados.add(new Resultado(
                         rs.getInt("id"),
+                        rs.getInt("idAnalisisDetalle"),
                         rs.getInt("idParametro"),
                         rs.getString("valor"),
                         rs.getDate("fechaRegistro")
@@ -60,18 +61,19 @@ public class ResultadoDAO implements IResultadoDAO{
 
     @Override
     public Resultado guardar(GuardarResultadoDTO resultado) throws PersistenciaException {
-        String query = "INSERT INTO Resultados (idParametro, valor) "
-                     + "VALUES (?, ?)";
+        String query = "INSERT INTO Resultados (idAnalisisDetalle,idParametro, valor) "
+                     + "VALUES (?, ?, ?)";
 
         try (Connection conexion = conexionBD.crearConexion();
                 PreparedStatement stmt = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, resultado.getIdParametro());
-            stmt.setString(2, resultado.getValor());
+            stmt.setInt(1, resultado.getIdAnalisisDetalle());
+            stmt.setInt(2, resultado.getIdParametro());
+            stmt.setString(3, resultado.getValor());
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
-                return new Resultado(rs.getInt(1),  resultado.getIdParametro(),
+                return new Resultado(rs.getInt(1),resultado.getIdAnalisisDetalle(),  resultado.getIdParametro(),
                         resultado.getValor(), new Date());
             } else {
                 throw new PersistenciaException("No se pudo obtener el ID generado");
@@ -83,19 +85,20 @@ public class ResultadoDAO implements IResultadoDAO{
 
     @Override
     public Resultado actualizar(EditarResultadoDTO resultado) throws PersistenciaException {
-        String query = "UPDATE Resultados SET idParametro = ?, valor = ? WHERE id = ?";
+        String query = "UPDATE Resultados SET idAnalisisDetalle=?, idParametro = ?, valor = ? WHERE id = ?";
 
         try (Connection conexion = conexionBD.crearConexion();
                 PreparedStatement stmt = conexion.prepareStatement(query)) {
-            stmt.setInt(1, resultado.getIdParametro());
-            stmt.setString(2, resultado.getValor());
-            stmt.setInt(3, resultado.getId());
+            stmt.setInt(1, resultado.getIdAnalisisDetalle());
+            stmt.setInt(2, resultado.getIdParametro());
+            stmt.setString(3, resultado.getValor());
+            stmt.setInt(4, resultado.getId());
 
             int rows = stmt.executeUpdate();
             if (rows == 0) {
                 throw new PersistenciaException("No se encontró el resultado a actualizar");
             }
-            return new Resultado(resultado.getId(), resultado.getIdParametro(),
+            return new Resultado(resultado.getId(),resultado.getIdAnalisisDetalle(), resultado.getIdParametro(),
                     resultado.getValor(), new Date());
         } catch (SQLException e) {
             throw new PersistenciaException(e.getMessage());
@@ -135,6 +138,7 @@ public class ResultadoDAO implements IResultadoDAO{
             if (rs.next()) {
                 return new Resultado(
                         rs.getInt("id"),
+                        rs.getInt("idAnalisisDetalle"),
                         rs.getInt("idParametro"),
                         rs.getString("valor"),
                         rs.getDate("fechaRegistro")
@@ -148,7 +152,7 @@ public class ResultadoDAO implements IResultadoDAO{
     }
     @Override
     public List<Resultado> listarResultado() throws PersistenciaException{
-        String query = "SELECT id,idParametro,valor,fechaRegistro FROM Resultados";
+        String query = "SELECT id,idAnalisisDetalle,idParametro,valor,fechaRegistro FROM Resultados";
 
         try (Connection conexion = conexionBD.crearConexion();
             PreparedStatement stmt = conexion.prepareStatement(query)) {
@@ -233,7 +237,7 @@ public class ResultadoDAO implements IResultadoDAO{
         int idParametro = resultado.getInt("idParametro");
         String valor = resultado.getString("valor");
         Date fechaRegistro = resultado.getDate("fechaRegistro");
-        return new Resultado(id, idParametro, valor, fechaRegistro);
+        return new Resultado(id,idAnalisisDetalle, idParametro, valor, fechaRegistro);
     }
 
     @Override
@@ -289,5 +293,28 @@ public class ResultadoDAO implements IResultadoDAO{
         }
         return listaResultados;
     
+    }
+    @Override
+    public int obtenerIdAnalisisDetalle(int idAnalisis, int idParametro) throws PersistenciaException {
+        String consulta = """
+            SELECT id FROM AnalisisDetalle 
+            WHERE idAnalisis = ? AND idPrueba = ?
+        """;
+
+        try (Connection conexion = conexionBD.crearConexion();
+             PreparedStatement stmt = conexion.prepareStatement(consulta)) {
+
+            stmt.setInt(1, idAnalisis);
+            stmt.setInt(2, idParametro);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            throw new PersistenciaException(e.getMessage());
+        }
     }
 }

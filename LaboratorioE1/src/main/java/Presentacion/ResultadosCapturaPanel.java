@@ -11,6 +11,7 @@ import DTOS.ParametroTablaDTO;
 import DTOS.ResultadoParametroAnalisisTablaDTO;
 import Negocio.IAnalisisNegocio;
 import Negocio.IParametroNegocio;
+import Negocio.IPruebaNegocio;
 import Negocio.IResultadoNegocio;
 import Negocio.NegocioException;
 import Utilidades.PanelManager;
@@ -36,10 +37,13 @@ public class ResultadosCapturaPanel extends javax.swing.JPanel {
     private List<ParametroDTO> parametros;
     private List<ResultadoParametroAnalisisTablaDTO> resultados;
     private final IParametroNegocio parametroNegocio;
+    private int idPrueba;
+    private IPruebaNegocio pruebaNegocio;
 
     public ResultadosCapturaPanel(PanelManager panel, IAnalisisNegocio analisisNegocio, int idAnalisis, 
                                   IResultadoNegocio resultadoNegocio, List<ParametroDTO> parametros, 
-                                  List<ResultadoParametroAnalisisTablaDTO> resultados,IParametroNegocio parametroNegocio) {
+                                  List<ResultadoParametroAnalisisTablaDTO> resultados,IParametroNegocio parametroNegocio, int idPrueba,
+                                  IPruebaNegocio pruebaNegocio) {
         initComponents();
         this.panel = panel;
         this.analisisNegocio = analisisNegocio;
@@ -48,6 +52,8 @@ public class ResultadosCapturaPanel extends javax.swing.JPanel {
         this.parametros = parametros;
         this.resultados = resultados;
         this.parametroNegocio =parametroNegocio;
+        this.idPrueba=idPrueba;
+        this.pruebaNegocio=pruebaNegocio;
         cargarDatosTabla();
     }
     private void cargarDatosTabla() {
@@ -82,9 +88,15 @@ public class ResultadosCapturaPanel extends javax.swing.JPanel {
                 String valor = (String) modeloTabla.getValueAt(i, 1);
 
                 int idParametro = obtenerIdParametro(nombreParametro);
-                System.out.println(idAnalisis);
+                System.out.println(idAnalisis+" "+idParametro+" "+idPrueba);
+                int idAnalisisDetalle = resultadoNegocio.obtenerIdAnalisisDetalle(idAnalisis, idPrueba);
 
-                resultadoNegocio.guardar(new GuardarResultadoDTO(idParametro, valor, new Date()));
+                if (idAnalisisDetalle == 0) {
+                    throw new NegocioException("No se encontró el idAnalisisDetalle para el análisis y parámetro seleccionados.");
+                }
+                System.out.println(idAnalisisDetalle);
+
+                resultadoNegocio.guardar(new GuardarResultadoDTO(idAnalisisDetalle, idParametro, valor, new Date()));
             }
 
             JOptionPane.showMessageDialog(this, "Resultados guardados exitosamente.");
@@ -100,6 +112,7 @@ public class ResultadosCapturaPanel extends javax.swing.JPanel {
         }
         throw new NegocioException("No se encontró el parámetro: " + nombreParametro);
     }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -233,13 +246,13 @@ public class ResultadosCapturaPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBTNActionPerformed
-        ResultadosPanel panelResultado = new ResultadosPanel(panel, analisisNegocio,resultadoNegocio,parametroNegocio);
+        ResultadosPanel panelResultado = new ResultadosPanel(panel, analisisNegocio,resultadoNegocio,parametroNegocio,pruebaNegocio);
         panel.cambiarPanel(panelResultado);
     }//GEN-LAST:event_cancelarBTNActionPerformed
 
     private void registrarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarBTNActionPerformed
         this.guardarResultados();
-        ResultadosPanel panelResultado = new ResultadosPanel(panel, analisisNegocio,resultadoNegocio,parametroNegocio);
+        ResultadosPanel panelResultado = new ResultadosPanel(panel, analisisNegocio,resultadoNegocio,parametroNegocio,pruebaNegocio);
         panel.cambiarPanel(panelResultado);
     }//GEN-LAST:event_registrarBTNActionPerformed
 
